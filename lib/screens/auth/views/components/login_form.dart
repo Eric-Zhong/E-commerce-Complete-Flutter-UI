@@ -23,23 +23,18 @@ class LogInForm extends StatelessWidget {
             },
             validator: emaildValidator.call,
             textInputAction: TextInputAction.next,
-            keyboardType: TextInputType.emailAddress,
+            // keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.number,
             decoration: InputDecoration(
-              hintText: "Email address",
+              // hintText: "Email address",
+              hintText: "手机号",
               prefixIcon: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+                padding: const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
                 child: SvgPicture.asset(
                   "assets/icons/Message.svg",
                   height: 24,
                   width: 24,
-                  colorFilter: ColorFilter.mode(
-                      Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .color!
-                          .withOpacity(0.3),
-                      BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.3), BlendMode.srcIn),
                 ),
               ),
             ),
@@ -52,21 +47,15 @@ class LogInForm extends StatelessWidget {
             validator: passwordValidator.call,
             obscureText: true,
             decoration: InputDecoration(
-              hintText: "Password",
+              // hintText: "Password",
+              hintText: "密码",
               prefixIcon: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+                padding: const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
                 child: SvgPicture.asset(
                   "assets/icons/Lock.svg",
                   height: 24,
                   width: 24,
-                  colorFilter: ColorFilter.mode(
-                      Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .color!
-                          .withOpacity(0.3),
-                      BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.3), BlendMode.srcIn),
                 ),
               ),
             ),

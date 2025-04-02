@@ -21,15 +21,13 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
       image: "assets/Illustration/Illustration-0.png",
       imageDarkTheme: "assets/Illustration/Illustration_darkTheme_0.png",
       title: "Find the item you’ve \nbeen looking for",
-      description:
-          "Here you’ll see rich varieties of goods, carefully classified for seamless browsing experience.",
+      description: "Here you’ll see rich varieties of goods, carefully classified for seamless browsing experience.",
     ),
     Onbord(
       image: "assets/Illustration/Illustration-1.png",
       imageDarkTheme: "assets/Illustration/Illustration_darkTheme_1.png",
       title: "Get those shopping \nbags filled",
-      description:
-          "Add any item you want to your cart, or save it on your wishlist, so you don’t miss it in your future purchases.",
+      description: "Add any item you want to your cart, or save it on your wishlist, so you don’t miss it in your future purchases.",
     ),
     Onbord(
       image: "assets/Illustration/Illustration-2.png",
@@ -41,15 +39,13 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
       image: "assets/Illustration/Illustration-3.png",
       imageDarkTheme: "assets/Illustration/Illustration_darkTheme_3.png",
       title: "Package tracking",
-      description:
-          "In particular, Shoplon can pack your orders, and help you seamlessly manage your shipments.",
+      description: "In particular, Shoplon can pack your orders, and help you seamlessly manage your shipments.",
     ),
     Onbord(
       image: "assets/Illustration/Illustration-4.png",
       imageDarkTheme: "assets/Illustration/Illustration_darkTheme_4.png",
       title: "Nearby stores",
-      description:
-          "Easily track nearby shops, browse through their items and get information about their prodcuts.",
+      description: "Easily track nearby shops, browse through their items and get information about their prodcuts.",
     ),
   ];
 
@@ -73,6 +69,7 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
           padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
           child: Column(
             children: [
+              // 欢迎页面右上角 Skip 按钮
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -80,9 +77,9 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
                     Navigator.pushNamed(context, logInScreenRoute);
                   },
                   child: Text(
-                    "Skip",
-                    style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge!.color),
+                    // "Skip",
+                    "跳过",
+                    style: TextStyle(color: Theme.of(context).textTheme.bodyLarge!.color),
                   ),
                 ),
               ),
@@ -98,32 +95,30 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
                   itemBuilder: (context, index) => OnbordingContent(
                     title: _onbordData[index].title,
                     description: _onbordData[index].description,
-                    image: (Theme.of(context).brightness == Brightness.dark &&
-                            _onbordData[index].imageDarkTheme != null)
-                        ? _onbordData[index].imageDarkTheme!
-                        : _onbordData[index].image,
+                    image: (Theme.of(context).brightness == Brightness.dark && _onbordData[index].imageDarkTheme != null) ? _onbordData[index].imageDarkTheme! : _onbordData[index].image,
                     isTextOnTop: index.isOdd,
                   ),
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ...List.generate(
                     _onbordData.length,
                     (index) => Padding(
-                      padding: const EdgeInsets.only(right: defaultPadding / 4),
+                      padding: const EdgeInsets.only(right: defaultPadding / 2),
                       child: DotIndicator(isActive: index == _pageIndex),
                     ),
                   ),
-                  const Spacer(),
+                  // const Spacer(),
                   SizedBox(
                     height: 60,
                     width: 60,
                     child: ElevatedButton(
                       onPressed: () {
                         if (_pageIndex < _onbordData.length - 1) {
-                          _pageController.nextPage(
-                              curve: Curves.ease, duration: defaultDuration);
+                          _pageController.nextPage(curve: Curves.ease, duration: defaultDuration);
                         } else {
                           Navigator.pushNamed(context, logInScreenRoute);
                         }

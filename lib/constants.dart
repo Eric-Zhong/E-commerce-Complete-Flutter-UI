@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:shop/validators/mobile_validator.dart';
 
 // Just for demo
 const productDemoImg1 = "https://i.imgur.com/CGCyp1d.png";
@@ -17,8 +18,7 @@ const grandisExtendedFont = "Grandis Extended";
 
 const Color primaryColor = Color(0xFF7B61FF);
 
-const MaterialColor primaryMaterialColor =
-    MaterialColor(0xFF9581FF, <int, Color>{
+const MaterialColor primaryMaterialColor = MaterialColor(0xFF9581FF, <int, Color>{
   50: Color(0xFFEFECFF),
   100: Color(0xFFD7D0FF),
   200: Color(0xFFBDB0FF),
@@ -67,15 +67,19 @@ const double defaultBorderRadious = 12.0;
 const Duration defaultDuration = Duration(milliseconds: 300);
 
 final passwordValidator = MultiValidator([
-  RequiredValidator(errorText: 'Password is required'),
-  MinLengthValidator(8, errorText: 'password must be at least 8 digits long'),
-  PatternValidator(r'(?=.*?[#?!@$%^&*-])',
-      errorText: 'passwords must have at least one special character')
+  // RequiredValidator(errorText: 'Password is required'),
+  RequiredValidator(errorText: '密码必填'),
+  // MinLengthValidator(8, errorText: 'password must be at least 8 digits long'),
+  MinLengthValidator(8, errorText: '密码必须至少8位'),
+  // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'passwords must have at least one special character')
 ]);
 
 final emaildValidator = MultiValidator([
-  RequiredValidator(errorText: 'Email is required'),
-  EmailValidator(errorText: "Enter a valid email address"),
+  // RequiredValidator(errorText: 'Email is required'),
+  RequiredValidator(errorText: '手机号必填'),
+  // EmailValidator(errorText: "Enter a valid email address"),
+  MobileValidator(errorText: "请输入正确的手机号"),
 ]);
 
-const pasNotMatchErrorText = "passwords do not match";
+// const pasNotMatchErrorText = "passwords do not match";
+const pasNotMatchErrorText = "手机号或密码不正确";
