@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shop/theme/input_decoration_theme.dart';
+import 'package:dragonai/theme/input_decoration_theme.dart';
 
 import '../../../constants.dart';
 
@@ -15,8 +15,7 @@ class LocationPermissonStoreAvailabilityScreen extends StatelessWidget {
           children: [
             const SizedBox(height: defaultPadding),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+              padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -51,10 +50,7 @@ class LocationPermissonStoreAvailabilityScreen extends StatelessWidget {
                             child: SvgPicture.asset(
                               "assets/icons/Search.svg",
                               height: 24,
-                              color: Theme.of(context)
-                                  .inputDecorationTheme
-                                  .hintStyle!
-                                  .color,
+                              color: Theme.of(context).inputDecorationTheme.hintStyle!.color,
                             ),
                           ),
                         ),
@@ -62,22 +58,16 @@ class LocationPermissonStoreAvailabilityScreen extends StatelessWidget {
                     ),
                     Center(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: defaultPadding * 1.5),
+                        padding: const EdgeInsets.symmetric(vertical: defaultPadding * 1.5),
                         child: Image.asset(
-                          Theme.of(context).brightness == Brightness.light
-                              ? "assets/Illustration/Illustration-4.png"
-                              : "assets/Illustration/Illustration_darkTheme_4.png",
+                          Theme.of(context).brightness == Brightness.light ? "assets/Illustration/Illustration-4.png" : "assets/Illustration/Illustration_darkTheme_4.png",
                           height: MediaQuery.of(context).size.height * 0.3,
                         ),
                       ),
                     ),
                     Text(
                       "Your Location Services are turned off.",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).textTheme.bodyLarge!.color),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Theme.of(context).textTheme.bodyLarge!.color),
                     ),
                     const SizedBox(height: defaultPadding),
                     const Text(

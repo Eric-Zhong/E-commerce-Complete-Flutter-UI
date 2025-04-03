@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shop/components/list_tile/divider_list_tile.dart';
-import 'package:shop/components/network_image_with_loader.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import 'package:dragonai/components/list_tile/divider_list_tile.dart';
+import 'package:dragonai/components/network_image_with_loader.dart';
+import 'package:dragonai/constants.dart';
+import 'package:dragonai/route/screen_export.dart';
 
 import 'components/profile_card.dart';
 import 'components/profile_menu_item_list_tile.dart';
@@ -27,14 +27,12 @@ class ProfileScreen extends StatelessWidget {
             },
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: defaultPadding, vertical: defaultPadding * 1.5),
+            padding: const EdgeInsets.symmetric(horizontal: defaultPadding, vertical: defaultPadding * 1.5),
             child: GestureDetector(
               onTap: () {},
               child: const AspectRatio(
                 aspectRatio: 1.8,
-                child:
-                    NetworkImageWithLoader("https://i.imgur.com/dz0BBom.png"),
+                child: NetworkImageWithLoader("https://i.imgur.com/dz0BBom.png"),
               ),
             ),
           ),
@@ -87,8 +85,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding),
           Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: defaultPadding, vertical: defaultPadding / 2),
+            padding: const EdgeInsets.symmetric(horizontal: defaultPadding, vertical: defaultPadding / 2),
             child: Text(
               "Personalization",
               style: Theme.of(context).textTheme.titleSmall,
@@ -111,8 +108,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding),
           Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: defaultPadding, vertical: defaultPadding / 2),
+            padding: const EdgeInsets.symmetric(horizontal: defaultPadding, vertical: defaultPadding / 2),
             child: Text(
               "Settings",
               style: Theme.of(context).textTheme.titleSmall,
@@ -132,8 +128,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding),
           Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: defaultPadding, vertical: defaultPadding / 2),
+            padding: const EdgeInsets.symmetric(horizontal: defaultPadding, vertical: defaultPadding / 2),
             child: Text(
               "Help & Support",
               style: Theme.of(context).textTheme.titleSmall,

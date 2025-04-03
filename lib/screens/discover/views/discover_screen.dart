@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/models/category_model.dart';
-import 'package:shop/screens/search/views/components/search_form.dart';
+import 'package:dragonai/constants.dart';
+import 'package:dragonai/models/category_model.dart';
+import 'package:dragonai/screens/search/views/components/search_form.dart';
 
 import 'components/expansion_category.dart';
 
@@ -20,8 +20,7 @@ class DiscoverScreen extends StatelessWidget {
               child: SearchForm(),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: defaultPadding, vertical: defaultPadding / 2),
+              padding: const EdgeInsets.symmetric(horizontal: defaultPadding, vertical: defaultPadding / 2),
               child: Text(
                 "Categories",
                 style: Theme.of(context).textTheme.titleSmall,

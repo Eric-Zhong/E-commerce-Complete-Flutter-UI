@@ -1,8 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import 'package:dragonai/constants.dart';
+import 'package:dragonai/route/screen_export.dart';
 
 class EntryPoint extends StatefulWidget {
   const EntryPoint({super.key});
@@ -28,11 +28,7 @@ class _EntryPointState extends State<EntryPoint> {
       return SvgPicture.asset(
         src,
         height: 24,
-        colorFilter: ColorFilter.mode(
-            color ??
-                Theme.of(context).iconTheme.color!.withOpacity(
-                    Theme.of(context).brightness == Brightness.dark ? 0.3 : 1),
-            BlendMode.srcIn),
+        colorFilter: ColorFilter.mode(color ?? Theme.of(context).iconTheme.color!.withOpacity(Theme.of(context).brightness == Brightness.dark ? 0.3 : 1), BlendMode.srcIn),
       );
     }
 
@@ -47,8 +43,7 @@ class _EntryPointState extends State<EntryPoint> {
         centerTitle: false,
         title: SvgPicture.asset(
           "assets/logo/Shoplon.svg",
-          colorFilter: ColorFilter.mode(
-              Theme.of(context).iconTheme.color!, BlendMode.srcIn),
+          colorFilter: ColorFilter.mode(Theme.of(context).iconTheme.color!, BlendMode.srcIn),
           height: 20,
           width: 100,
         ),
@@ -60,9 +55,7 @@ class _EntryPointState extends State<EntryPoint> {
             icon: SvgPicture.asset(
               "assets/icons/Search.svg",
               height: 24,
-              colorFilter: ColorFilter.mode(
-                  Theme.of(context).textTheme.bodyLarge!.color!,
-                  BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(Theme.of(context).textTheme.bodyLarge!.color!, BlendMode.srcIn),
             ),
           ),
           IconButton(
@@ -72,9 +65,7 @@ class _EntryPointState extends State<EntryPoint> {
             icon: SvgPicture.asset(
               "assets/icons/Notification.svg",
               height: 24,
-              colorFilter: ColorFilter.mode(
-                  Theme.of(context).textTheme.bodyLarge!.color!,
-                  BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(Theme.of(context).textTheme.bodyLarge!.color!, BlendMode.srcIn),
             ),
           ),
         ],
@@ -93,9 +84,7 @@ class _EntryPointState extends State<EntryPoint> {
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: defaultPadding / 2),
-        color: Theme.of(context).brightness == Brightness.light
-            ? Colors.white
-            : const Color(0xFF101015),
+        color: Theme.of(context).brightness == Brightness.light ? Colors.white : const Color(0xFF101015),
         child: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index) {
@@ -105,9 +94,7 @@ class _EntryPointState extends State<EntryPoint> {
               });
             }
           },
-          backgroundColor: Theme.of(context).brightness == Brightness.light
-              ? Colors.white
-              : const Color(0xFF101015),
+          backgroundColor: Theme.of(context).brightness == Brightness.light ? Colors.white : const Color(0xFF101015),
           type: BottomNavigationBarType.fixed,
           // selectedLabelStyle: TextStyle(color: primaryColor),
           selectedFontSize: 12,
@@ -121,14 +108,12 @@ class _EntryPointState extends State<EntryPoint> {
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Category.svg"),
-              activeIcon:
-                  svgIcon("assets/icons/Category.svg", color: primaryColor),
+              activeIcon: svgIcon("assets/icons/Category.svg", color: primaryColor),
               label: "Discover",
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Bookmark.svg"),
-              activeIcon:
-                  svgIcon("assets/icons/Bookmark.svg", color: primaryColor),
+              activeIcon: svgIcon("assets/icons/Bookmark.svg", color: primaryColor),
               label: "Bookmark",
             ),
             BottomNavigationBarItem(
@@ -138,8 +123,7 @@ class _EntryPointState extends State<EntryPoint> {
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Profile.svg"),
-              activeIcon:
-                  svgIcon("assets/icons/Profile.svg", color: primaryColor),
+              activeIcon: svgIcon("assets/icons/Profile.svg", color: primaryColor),
               label: "Profile",
             ),
           ],

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shop/components/buy_full_ui_kit.dart';
-import 'package:shop/components/cart_button.dart';
-import 'package:shop/components/custom_modal_bottom_sheet.dart';
-import 'package:shop/components/product/product_card.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/screens/product/views/product_returns_screen.dart';
+import 'package:dragonai/components/buy_full_ui_kit.dart';
+import 'package:dragonai/components/cart_button.dart';
+import 'package:dragonai/components/custom_modal_bottom_sheet.dart';
+import 'package:dragonai/components/product/product_card.dart';
+import 'package:dragonai/constants.dart';
+import 'package:dragonai/screens/product/views/product_returns_screen.dart';
 
-import 'package:shop/route/screen_export.dart';
+import 'package:dragonai/route/screen_export.dart';
 
 import 'components/notify_me_card.dart';
 import 'components/product_images.dart';
@@ -51,8 +51,7 @@ class ProductDetailsScreen extends StatelessWidget {
               actions: [
                 IconButton(
                   onPressed: () {},
-                  icon: SvgPicture.asset("assets/icons/Bookmark.svg",
-                      color: Theme.of(context).textTheme.bodyLarge!.color),
+                  icon: SvgPicture.asset("assets/icons/Bookmark.svg", color: Theme.of(context).textTheme.bodyLarge!.color),
                 ),
               ],
             ),
@@ -63,8 +62,7 @@ class ProductDetailsScreen extends StatelessWidget {
               brand: "LIPSY LONDON",
               title: "Sleeveless Ruffle",
               isAvailable: isProductAvailable,
-              description:
-                  "A cool gray cap in soft corduroy. Watch me.' By buying cotton products from Lindex, you’re supporting more responsibly...",
+              description: "A cool gray cap in soft corduroy. Watch me.' By buying cotton products from Lindex, you’re supporting more responsibly...",
               rating: 4.4,
               numOfReviews: 126,
             ),
@@ -75,8 +73,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 customModalBottomSheet(
                   context,
                   height: MediaQuery.of(context).size.height * 0.92,
-                  child: const BuyFullKit(
-                      images: ["assets/screens/Product detail.png"]),
+                  child: const BuyFullKit(images: ["assets/screens/Product detail.png"]),
                 );
               },
             ),
@@ -143,9 +140,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
                   itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.only(
-                        left: defaultPadding,
-                        right: index == 4 ? defaultPadding : 0),
+                    padding: EdgeInsets.only(left: defaultPadding, right: index == 4 ? defaultPadding : 0),
                     child: ProductCard(
                       image: productDemoImg2,
                       title: "Sleeveless Tiered Dobby Swing Dress",

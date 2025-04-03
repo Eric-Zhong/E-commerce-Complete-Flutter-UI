@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shop/components/product/product_card.dart';
-import 'package:shop/models/product_model.dart';
-import 'package:shop/route/route_constants.dart';
+import 'package:dragonai/components/product/product_card.dart';
+import 'package:dragonai/models/product_model.dart';
+import 'package:dragonai/route/route_constants.dart';
 
 import '../../../constants.dart';
 
@@ -16,8 +16,7 @@ class BookmarkScreen extends StatelessWidget {
           // While loading use 👇
           //  BookMarksSlelton(),
           SliverPadding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: defaultPadding, vertical: defaultPadding),
+            padding: const EdgeInsets.symmetric(horizontal: defaultPadding, vertical: defaultPadding),
             sliver: SliverGrid(
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200.0,
@@ -32,8 +31,7 @@ class BookmarkScreen extends StatelessWidget {
                     brandName: demoPopularProducts[index].brandName,
                     title: demoPopularProducts[index].title,
                     price: demoPopularProducts[index].price,
-                    priceAfetDiscount:
-                        demoPopularProducts[index].priceAfetDiscount,
+                    priceAfetDiscount: demoPopularProducts[index].priceAfetDiscount,
                     dicountpercent: demoPopularProducts[index].dicountpercent,
                     press: () {
                       Navigator.pushNamed(context, productDetailsScreenRoute);

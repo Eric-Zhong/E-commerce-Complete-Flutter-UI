@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:shop/components/Banner/L/banner_l.dart';
+import 'package:dragonai/components/Banner/L/banner_l.dart';
 
 import '../../../constants.dart';
 
@@ -77,9 +77,7 @@ class BannerLStyle1 extends StatelessWidget {
               ),
               if (subtitle != null)
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: defaultPadding / 2,
-                      vertical: defaultPadding / 8),
+                  padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2, vertical: defaultPadding / 8),
                   color: Colors.white70,
                   child: Text(
                     subtitle!,

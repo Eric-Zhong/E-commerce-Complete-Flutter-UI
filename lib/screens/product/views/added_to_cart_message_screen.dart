@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import 'package:dragonai/constants.dart';
+import 'package:dragonai/route/screen_export.dart';
 
 class AddedToCartMessageScreen extends StatelessWidget {
   const AddedToCartMessageScreen({super.key});
@@ -15,18 +15,13 @@ class AddedToCartMessageScreen extends StatelessWidget {
             children: [
               const Spacer(),
               Image.asset(
-                Theme.of(context).brightness == Brightness.light
-                    ? "assets/Illustration/success.png"
-                    : "assets/Illustration/success_dark.png",
+                Theme.of(context).brightness == Brightness.light ? "assets/Illustration/success.png" : "assets/Illustration/success_dark.png",
                 height: MediaQuery.of(context).size.height * 0.3,
               ),
               const Spacer(flex: 2),
               Text(
                 "Added to cart",
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineSmall!
-                    .copyWith(fontWeight: FontWeight.w500),
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: defaultPadding / 2),
               const Text(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/components/cart_button.dart';
-import 'package:shop/components/custom_modal_bottom_sheet.dart';
-import 'package:shop/components/network_image_with_loader.dart';
-import 'package:shop/screens/product/views/added_to_cart_message_screen.dart';
-import 'package:shop/screens/product/views/components/product_list_tile.dart';
-import 'package:shop/screens/product/views/location_permission_store_availability_screen.dart';
-import 'package:shop/screens/product/views/size_guide_screen.dart';
+import 'package:dragonai/components/cart_button.dart';
+import 'package:dragonai/components/custom_modal_bottom_sheet.dart';
+import 'package:dragonai/components/network_image_with_loader.dart';
+import 'package:dragonai/screens/product/views/added_to_cart_message_screen.dart';
+import 'package:dragonai/screens/product/views/components/product_list_tile.dart';
+import 'package:dragonai/screens/product/views/location_permission_store_availability_screen.dart';
+import 'package:dragonai/screens/product/views/size_guide_screen.dart';
 
 import '../../../constants.dart';
 import 'components/product_quantity.dart';
@@ -40,8 +40,7 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: defaultPadding / 2, vertical: defaultPadding),
+            padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2, vertical: defaultPadding),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -52,8 +51,7 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: SvgPicture.asset("assets/icons/Bookmark.svg",
-                      color: Theme.of(context).textTheme.bodyLarge!.color),
+                  icon: SvgPicture.asset("assets/icons/Bookmark.svg", color: Theme.of(context).textTheme.bodyLarge!.color),
                 ),
               ],
             ),
@@ -128,8 +126,7 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                   ),
                 ),
                 SliverPadding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: defaultPadding),
+                  padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
                   sliver: SliverToBoxAdapter(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,8 +137,7 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         const SizedBox(height: defaultPadding / 2),
-                        const Text(
-                            "Select a size to check store availability and In-Store pickup options.")
+                        const Text("Select a size to check store availability and In-Store pickup options.")
                       ],
                     ),
                   ),
@@ -161,8 +157,7 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                     },
                   ),
                 ),
-                const SliverToBoxAdapter(
-                    child: SizedBox(height: defaultPadding))
+                const SliverToBoxAdapter(child: SizedBox(height: defaultPadding))
               ],
             ),
           )

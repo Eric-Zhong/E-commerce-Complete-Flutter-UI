@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop/components/check_mark.dart';
+import 'package:dragonai/components/check_mark.dart';
 
 import '../../../../constants.dart';
 
@@ -25,8 +25,7 @@ class ColorDot extends StatelessWidget {
         width: 40,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border:
-              Border.all(color: isActive ? primaryColor : Colors.transparent),
+          border: Border.all(color: isActive ? primaryColor : Colors.transparent),
         ),
         child: Stack(
           alignment: Alignment.center,

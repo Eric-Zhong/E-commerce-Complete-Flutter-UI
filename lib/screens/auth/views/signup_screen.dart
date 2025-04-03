@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:shop/screens/auth/views/components/sign_up_form.dart';
-import 'package:shop/route/route_constants.dart';
+import 'package:dragonai/screens/auth/views/components/sign_up_form.dart';
+import 'package:dragonai/route/route_constants.dart';
 
 import '../../../constants.dart';
 
@@ -33,13 +33,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Let’s get started!",
+                    // "Let’s get started!",
+                    "让我们开始吧!",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: defaultPadding / 2),
                   const Text(
-                    "Please enter your valid data in order to create an account.",
-                  ),
+                      // "Please enter your valid data in order to create an account.",
+                      "请输入有效的数据以创建一个帐户。"),
                   const SizedBox(height: defaultPadding),
                   SignUpForm(formKey: _formKey),
                   const SizedBox(height: defaultPadding),
@@ -52,22 +53,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Expanded(
                         child: Text.rich(
                           TextSpan(
-                            text: "I agree with the",
+                            // text: "I agree with the",
+                            text: "我同意",
                             children: [
                               TextSpan(
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.pushNamed(
-                                        context, termsOfServicesScreenRoute);
+                                    Navigator.pushNamed(context, termsOfServicesScreenRoute);
                                   },
-                                text: " Terms of service ",
+                                // text: " Terms of service ",
+                                text: "《服务条款》",
                                 style: const TextStyle(
                                   color: primaryColor,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
                               const TextSpan(
-                                text: "& privacy policy.",
+                                text: "和隐私权政策",
                               ),
                             ],
                           ),

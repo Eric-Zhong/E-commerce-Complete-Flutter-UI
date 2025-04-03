@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/components/network_image_with_loader.dart';
+import 'package:dragonai/components/network_image_with_loader.dart';
 
 import '../../../../constants.dart';
 
@@ -44,12 +44,10 @@ class ProfileCard extends StatelessWidget {
           const SizedBox(width: defaultPadding / 2),
           if (isPro)
             Container(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: defaultPadding / 2, vertical: defaultPadding / 4),
+              padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2, vertical: defaultPadding / 4),
               decoration: const BoxDecoration(
                 color: primaryColor,
-                borderRadius:
-                    BorderRadius.all(Radius.circular(defaultBorderRadious)),
+                borderRadius: BorderRadius.all(Radius.circular(defaultBorderRadious)),
               ),
               child: Text(
                 proLableText,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:shop/validators/mobile_validator.dart';
+import 'package:dragonai/validators/mobile_validator.dart';
 
 // Just for demo
 const productDemoImg1 = "https://i.imgur.com/CGCyp1d.png";
@@ -83,3 +83,11 @@ final emaildValidator = MultiValidator([
 
 // const pasNotMatchErrorText = "passwords do not match";
 const pasNotMatchErrorText = "手机号或密码不正确";
+
+String apiUrl = 'http://localhost:8080/dragonfly-boot';
+String webSocketUrl = 'ws://localhost:8080/dragonfly-boot';
+// Storage Key
+const keyApiToken = 'API_TOKEN';
+const keyLoginTime = 'LOGIN_TIME';
+const keyUserRealName = 'USER_REAL_NAME';
+const keyUserId = 'USER_ID';

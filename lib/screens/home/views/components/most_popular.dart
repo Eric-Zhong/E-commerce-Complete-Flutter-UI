@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shop/components/product/secondary_product_card.dart';
-import 'package:shop/models/product_model.dart';
+import 'package:dragonai/components/product/secondary_product_card.dart';
+import 'package:dragonai/models/product_model.dart';
 
 import '../../../../constants.dart';
 import '../../../../route/route_constants.dart';
@@ -34,9 +34,7 @@ class MostPopular extends StatelessWidget {
             itemBuilder: (context, index) => Padding(
               padding: EdgeInsets.only(
                 left: defaultPadding,
-                right: index == demoPopularProducts.length - 1
-                    ? defaultPadding
-                    : 0,
+                right: index == demoPopularProducts.length - 1 ? defaultPadding : 0,
               ),
               child: SecondaryProductCard(
                 image: demoPopularProducts[index].image,
@@ -46,8 +44,7 @@ class MostPopular extends StatelessWidget {
                 priceAfetDiscount: demoPopularProducts[index].priceAfetDiscount,
                 dicountpercent: demoPopularProducts[index].dicountpercent,
                 press: () {
-                  Navigator.pushNamed(context, productDetailsScreenRoute,
-                      arguments: index.isEven);
+                  Navigator.pushNamed(context, productDetailsScreenRoute, arguments: index.isEven);
                 },
               ),
             ),

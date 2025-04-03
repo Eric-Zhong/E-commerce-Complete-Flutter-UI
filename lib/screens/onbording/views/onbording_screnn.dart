@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shop/components/dot_indicators.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/route_constants.dart';
+import 'package:dragonai/components/dot_indicators.dart';
+import 'package:dragonai/constants.dart';
+import 'package:dragonai/route/route_constants.dart';
 
 import 'components/onbording_content.dart';
 
@@ -18,34 +18,34 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
   int _pageIndex = 0;
   final List<Onbord> _onbordData = [
     Onbord(
-      image: "assets/Illustration/Illustration-0.png",
+      image: "assets/Illustration/ComfyUI_Onboard_0.png",
       imageDarkTheme: "assets/Illustration/Illustration_darkTheme_0.png",
-      title: "Find the item you’ve \nbeen looking for",
-      description: "Here you’ll see rich varieties of goods, carefully classified for seamless browsing experience.",
+      title: "欢迎来到AI设计新纪元！",
+      description: "这款APP专为室内设计师打造，利用先进的AI技术，将您的设计灵感转化为逼真的效果图。",
     ),
     Onbord(
-      image: "assets/Illustration/Illustration-1.png",
+      image: "assets/Illustration/ComfyUI_Onboard_1.png",
       imageDarkTheme: "assets/Illustration/Illustration_darkTheme_1.png",
-      title: "Get those shopping \nbags filled",
-      description: "Add any item you want to your cart, or save it on your wishlist, so you don’t miss it in your future purchases.",
+      title: "智能空间布局，一键生成！",
+      description: "只需上传室内空间照片，AI即可智能分析空间结构，快速生成多种布局方案，为您节省大量设计时间。",
     ),
     Onbord(
-      image: "assets/Illustration/Illustration-2.png",
+      image: "assets/Illustration/ComfyUI_Onboard_2.png",
       imageDarkTheme: "assets/Illustration/Illustration_darkTheme_2.png",
-      title: "Fast & secure \npayment",
-      description: "There are many payment options available for your ease.",
+      title: "风格随心变，创意无限！",
+      description: "从现代简约到古典奢华，各种室内设计风格应有尽有。输入文字描述或上传参考图，AI助您轻松实现个性化设计。",
     ),
     Onbord(
-      image: "assets/Illustration/Illustration-3.png",
+      image: "assets/Illustration/ComfyUI_Onboard_3.png",
       imageDarkTheme: "assets/Illustration/Illustration_darkTheme_3.png",
-      title: "Package tracking",
-      description: "In particular, Shoplon can pack your orders, and help you seamlessly manage your shipments.",
+      title: "材质纹理，逼真呈现！",
+      description: "AI能够模拟各种室内装饰材料的真实质感，从木质地板到大理石墙面，让您的效果图更具说服力。",
     ),
     Onbord(
-      image: "assets/Illustration/Illustration-4.png",
+      image: "assets/Illustration/ComfyUI_Onboard_4.png",
       imageDarkTheme: "assets/Illustration/Illustration_darkTheme_4.png",
-      title: "Nearby stores",
-      description: "Easily track nearby shops, browse through their items and get information about their prodcuts.",
+      title: "实时渲染，所见即所得！",
+      description: "告别漫长的渲染等待，AI实时呈现设计效果，让您随时调整，即刻看到最终成果。",
     ),
   ];
 
@@ -111,6 +111,13 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
                       child: DotIndicator(isActive: index == _pageIndex),
                     ),
                   ),
+                ],
+              ),
+              const SizedBox(height: defaultPadding * 2),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
                   // const Spacer(),
                   SizedBox(
                     height: 60,
@@ -137,7 +144,7 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: defaultPadding),
+              const SizedBox(height: defaultPadding * 2),
             ],
           ),
         ),

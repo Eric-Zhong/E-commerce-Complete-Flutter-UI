@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop/components/network_image_with_loader.dart';
+import 'package:dragonai/components/network_image_with_loader.dart';
 
 import '../../../../constants.dart';
 
@@ -28,8 +28,7 @@ class ReviewProductInfoCard extends StatelessWidget {
             children: [
               Text(
                 brand.toUpperCase(),
-                style:
-                    const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: defaultPadding / 2),
               Text(
