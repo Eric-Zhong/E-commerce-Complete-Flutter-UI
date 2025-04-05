@@ -1,6 +1,8 @@
+import 'package:dragonai/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:dragonai/constants.dart';
 import 'package:dragonai/route/route_constants.dart';
+import 'package:provider/provider.dart';
 
 import 'components/login_form.dart';
 
@@ -13,18 +15,32 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   // KB: GlobalKey<FormState> 是 Flutter 中用于操作 Form 表单的一个重要工具。
-  // _formKey.currentState!.validate()
-  // _formKey.currentState!.save();
-  // _formKey.currentState!.reset();
+  /*
+    _formKey.currentState!.validate()
+    _formKey.currentState!.save();
+    _formKey.currentState!.reset();
+  */
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  // state variables
-  bool _isRememberMe = false;
+  // providers
+  late final AuthProvider _authProvider; // 添加成员变量
+
+  @override
+  void initState() {
+    super.initState();
+    _authProvider = Provider.of<AuthProvider>(context, listen: false);
+  }
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    // KB: 临时状态 - 在使用处注册
+    // return ChangeNotifierProvider(
+    //   create: (_) => FormProvider(),
+    //   child: FormContent(),
+    // );
 
+    // KB: Provider 的注册方式, 功能模块状态 - 在模块根组件注册
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -57,17 +73,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       Checkbox(
                         onChanged: (value) {
                           setState(() {
-                            _isRememberMe = value!;
+                            _authProvider.setRememberMe(value!);
                           });
                         },
-                        value: _isRememberMe,
+                        value: _authProvider.rememberMe,
                       ),
                       const Expanded(
                         child: Text.rich(
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: "记住密码，下次自动登录。",
+                                text: "记住手机号和密码，下次自动登录。",
                               ),
                             ],
                           ),
@@ -89,9 +105,60 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: size.height > 700 ? size.height / 100 : defaultPadding,
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.pushNamedAndRemoveUntil(context, entryPointScreenRoute, ModalRoute.withName(logInScreenRoute));
+                        if (!mounted) return;
+                        // KB: Navigator.pushNamedAndRemoveUntil() 清除历史并跳转（常用于登录后跳转到主页）
+                        /* 学习示例
+                          // 场景1：登录成功后完全清除历史
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            '/home',
+                            (route) => false,  // 清除所有历史
+                          );
+
+                          // 场景2：保留主页和登录页
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            '/success',
+                            (route) => route.settings.name == '/home' || route.settings.name == '/login',
+                          );
+
+                          // 场景3：保留特定前缀的路由
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            '/dashboard',
+                            (route) => route.settings.name?.startsWith('/auth') ?? false,
+                          );
+                        */
+                        /*
+                          这段代码的用途：
+                          跳转到 entryPointScreenRoute（比如主页）
+                          清除路由栈中的所有页面，直到遇到名为 logInScreenRoute 的路由
+                          保留 logInScreenRoute（登录页）在栈中
+                        */
+                        bool result = await _authProvider.login();
+
+                        if (!mounted) return;
+
+                        if (result) {
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            entryPointScreenRoute,
+                            // 保留页
+                            // ModalRoute.withName(logInScreenRoute), // dragonai 不需要保留登录页
+                            (route) => false, // 清除所有历史
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                // "登录失败，请检查用户名或密码是否正确。",
+                                _authProvider.error ?? "出错啦，请检查用户名或密码是否正确。",
+                              ),
+                            ),
+                          );
+                        }
                       }
                     },
                     // child: const Text("Log in"),
@@ -107,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.pushNamed(context, signUpScreenRoute);
                         },
                         // child: const Text("Sign up"),
-                        child: const Text("注册新用户"),
+                        child: const Text("新用户注册"),
                       )
                     ],
                   ),

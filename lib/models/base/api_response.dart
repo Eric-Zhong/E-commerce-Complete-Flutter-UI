@@ -39,6 +39,13 @@ class ApiResponse<T> extends BaseApiResponse<T> {
         json,
         fromJsonT,
       );
+
+  static String fromStringResponseJson(
+    Object? json,
+  ) {
+    String jsonMap = json as String;
+    return jsonMap;
+  }
 }
 
 // **************************************************************************

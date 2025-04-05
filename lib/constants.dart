@@ -1,3 +1,4 @@
+import 'package:dragonai/validators/sms_verification_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:dragonai/validators/mobile_validator.dart';
@@ -74,20 +75,31 @@ final passwordValidator = MultiValidator([
   // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'passwords must have at least one special character')
 ]);
 
-final emaildValidator = MultiValidator([
+final phoneValidator = MultiValidator([
   // RequiredValidator(errorText: 'Email is required'),
   RequiredValidator(errorText: '手机号必填'),
   // EmailValidator(errorText: "Enter a valid email address"),
   MobileValidator(errorText: "请输入正确的手机号"),
 ]);
 
+final smsVerificationValidator = MultiValidator([
+  RequiredValidator(errorText: '短信验证码必填'),
+  SmsVerificationValidator(errorText: "输入6位数字验证码"),
+]);
+
 // const pasNotMatchErrorText = "passwords do not match";
 const pasNotMatchErrorText = "手机号或密码不正确";
 
-String apiUrl = 'http://localhost:8080/dragonfly-boot';
-String webSocketUrl = 'ws://localhost:8080/dragonfly-boot';
+const apiRootPath = 'dragonfly-boot';
+String apiUrl = 'http://localhost:8080/$apiRootPath';
+String webSocketUrl = 'ws://localhost:8080/$apiRootPath';
+// Login account
+const keyPhone = 'PHONE';
+const keyPassword = 'PASSWORD';
+const keyRememberMe = 'REMEMBER_ME';
 // Storage Key
 const keyApiToken = 'API_TOKEN';
 const keyLoginTime = 'LOGIN_TIME';
 const keyUserRealName = 'USER_REAL_NAME';
 const keyUserId = 'USER_ID';
+const signature = 'a8c2e5b9d1f463c7b986d3e4f2g658h9';

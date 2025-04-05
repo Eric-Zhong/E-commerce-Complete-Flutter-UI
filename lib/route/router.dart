@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:dragonai/entry_point.dart';
+import 'package:dragonai/screens/auth/views/sms_verification_screen.dart';
+import 'package:flutter/material.dart';
 
 import 'screen_export.dart';
 
@@ -299,6 +300,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //   return MaterialPageRoute(
     //     builder: (context) => const ThanksForOrderScreen(),
     //   );
+
+    // DragonAI.vip
+    case smsVerificationScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) => const SmsVerificationScreen(),
+      );
+
     default:
       return MaterialPageRoute(
         // Make a screen for undefine

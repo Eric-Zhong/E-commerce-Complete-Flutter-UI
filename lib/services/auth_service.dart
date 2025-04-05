@@ -2,11 +2,18 @@ import 'package:dragonai/constants.dart';
 import 'package:dragonai/models/account/role.dart';
 import 'package:dragonai/models/authorization/login_request.dart';
 import 'package:dragonai/models/authorization/login_response.dart';
+import 'package:dragonai/models/authorization/register_request.dart';
+import 'package:dragonai/models/authorization/sms_request.dart';
 import 'package:dragonai/models/base/api_response.dart';
 import 'package:dragonai/services/base_service.dart';
+import 'package:dragonai/utils/sign_utils.dart';
 import 'package:flutter/foundation.dart';
 
 class AuthService extends BaseService {
+  AuthService() {
+    onInit();
+  }
+
   @override
   void onInit() {
     httpClient.defaultDecoder = (map) {
@@ -20,35 +27,34 @@ class AuthService extends BaseService {
     httpClient.baseUrl = apiUrl;
   }
 
-  // Authorization
+  /// 登录验证
   Future<ApiResponse<LoginResponse>?> authorize(LoginRequest inputDto) async {
-    // debugPrint('LoginProvider.authorize: ${httpClient.baseUrl}');
-    var resp = await post(
-      "/sys/login",
-      inputDto.toJson(),
-      headers: {
-        'Content-Type': 'application/json',
-        // 'x-api-key': Constants.tokenPostmanApi,
-      },
-      decoder: (data) {
-        if (data is String) {
-          // debugPrint(data);
-          return ApiResponse<LoginResponse>(success: false, message: '失败', error: '登录认证失败', result: null);
-        } else {
-          return ApiResponse.fromJson(data, LoginResponse.fromJson);
-        }
-      },
-    );
-    // debugPrint(resp.bodyString);
-    if (resp.status.hasError) {
-      // 返回错误信息
-      return Future.error(resp.statusText ?? 'Error');
-    } else {
-      return resp.body;
+    try {
+      var resp = await post(
+        "/sys/login",
+        inputDto.toJson(),
+        headers: {'Content-Type': 'application/json'},
+        decoder: (data) {
+          if (data is String) {
+            // debugPrint(data);
+            return ApiResponse<LoginResponse>(success: false, message: '失败', error: '登录认证失败', result: null);
+          } else {
+            return ApiResponse.fromJson(data, LoginResponse.fromJson);
+          }
+        },
+      );
+      if (resp.status.hasError) {
+        // 返回错误信息
+        return Future.error(resp.statusText ?? 'Error');
+      } else {
+        return resp.body;
+      }
+    } catch (e) {
+      throw Exception('登录请求失败: ${e.toString()}');
     }
   }
 
-  // 登录后调用api获取用户的角色信息
+  /// 获取用户的角色信息
   Future<ApiResponse<List<Role>>?> getUserRoles(String userId) async {
     var token = storage.read(keyApiToken);
     var query = {'userid': userId};
@@ -74,6 +80,78 @@ class AuthService extends BaseService {
       return Future.error(resp.statusText ?? 'Error');
     } else {
       return resp.body;
+    }
+  }
+
+  /// 新用户注册
+  Future<ApiResponse<String>?> register(RegisterRequest inputDto) async {
+    try {
+      var resp = await post(
+        "/sys/user/register",
+        inputDto.toJson(),
+        headers: {'Content-Type': 'application/json'},
+        decoder: (data) {
+          return ApiResponse<String>.fromJson(data, ApiResponse.fromStringResponseJson);
+        },
+      );
+      if (resp.status.hasError) {
+        // 返回错误信息
+        return Future.error(resp.statusText ?? 'Error');
+      } else {
+        return resp.body;
+      }
+    } catch (e) {
+      throw Exception('新用户注册失败: ${e.toString()}');
+    }
+  }
+
+  /// 手机是否存在验证
+  Future<ApiResponse<String>?> checkPhone(LoginRequest inputDto) async {
+    try {
+      var resp = await post(
+        "/sys/checkphone",
+        inputDto.toJson(),
+        headers: {'Content-Type': 'application/json'},
+        decoder: (data) {
+          return ApiResponse<String>.fromJson(data, ApiResponse.fromStringResponseJson);
+        },
+      );
+      if (resp.status.hasError) {
+        // 返回错误信息
+        return Future.error(resp.statusText ?? 'Error');
+      } else {
+        return resp.body;
+      }
+    } catch (e) {
+      throw Exception('检查手机号有效性失败: ${e.toString()}');
+    }
+  }
+
+  /// 手机是否存在验证
+  Future<ApiResponse<String>?> sms(SmsRequest inputDto) async {
+    // 登录前的自定义签名
+    String signature = SignUtils.getSign('/$apiRootPath/sys/sms', inputDto.toJson());
+    try {
+      var resp = await post(
+        "/sys/sms",
+        inputDto.toJson(),
+        headers: {
+          'Content-Type': 'application/json',
+          'X-TIMESTAMP': DateTime.now().millisecondsSinceEpoch.toString(),
+          'X-Sign': signature,
+        },
+        decoder: (data) {
+          return ApiResponse<String>.fromJson(data, ApiResponse.fromStringResponseJson);
+        },
+      );
+      if (resp.status.hasError) {
+        // 返回错误信息
+        return Future.error(resp.statusText ?? 'Error');
+      } else {
+        return resp.body;
+      }
+    } catch (e) {
+      throw Exception('发送短信失败: ${e.toString()}');
     }
   }
 }

@@ -1,5 +1,7 @@
+import 'package:dragonai/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants.dart';
 
@@ -13,15 +15,15 @@ class LogInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context, listen: false);
     return Form(
       key: formKey,
       child: Column(
         children: [
           TextFormField(
-            onSaved: (emal) {
-              // Email
-            },
-            validator: emaildValidator.call,
+            // initialValue: "", // KB: 与 controller 只能存在一个，否则会报错
+            controller: authProvider.phoneController,
+            validator: phoneValidator.call,
             textInputAction: TextInputAction.next,
             // keyboardType: TextInputType.emailAddress,
             keyboardType: TextInputType.number,
@@ -41,9 +43,7 @@ class LogInForm extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding),
           TextFormField(
-            onSaved: (pass) {
-              // Password
-            },
+            controller: authProvider.passwordController,
             validator: passwordValidator.call,
             obscureText: true,
             decoration: InputDecoration(

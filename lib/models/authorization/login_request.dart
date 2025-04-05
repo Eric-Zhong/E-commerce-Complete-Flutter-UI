@@ -4,6 +4,7 @@ class LoginRequest {
   bool? remember;
   String? captcha;
   String? checkKey;
+  String? phone;
 
   LoginRequest({
     this.username,
@@ -11,6 +12,7 @@ class LoginRequest {
     this.remember,
     this.checkKey,
     this.captcha,
+    this.phone,
   });
 
   LoginRequest.fromJson(Map<String, dynamic> json) {
@@ -19,6 +21,7 @@ class LoginRequest {
     remember = json['remember'];
     captcha = json['captcha'];
     checkKey = json['checkKey'];
+    phone = json['phone'];
   }
 
   Map<String, dynamic> toJson() {
@@ -28,6 +31,7 @@ class LoginRequest {
     data['remember'] = remember;
     data['captcha'] = captcha;
     data['checkKey'] = checkKey;
+    data['phone'] = phone;
     return data;
   }
 }

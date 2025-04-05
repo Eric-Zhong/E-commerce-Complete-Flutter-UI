@@ -5,21 +5,72 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "E-commerce-Complete-Flutter-UI",
+            "name": "DragonAI - 10.0.2.2",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": [
+                "--dart-define=DEF_DEVELOP_ENV=WINDOWS",
+                "--verbose"
+            ]
         },
         {
-            "name": "E-commerce-Complete-Flutter-UI (profile mode)",
+            "name": "DragonAI - 192.168.2.25",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define=DEF_DEVELOP_ENV=HUAWEI",
+                "--verbose"
+            ]
+        },
+        {
+            "name": "DragonAI - 8.140.48.78",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define=DEF_DEVELOP_ENV=PROD",
+                "--verbose"
+            ]
+        },
+        {
+            "name": "DragonAI (show components)",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define=DEF_DEVELOP_ENV=WINDOWS",
+                "--dart-define=DEF_DEBUG_COMPONENTS=1",
+                "--verbose"
+            ]
+        },
+        {
+            "name": "Flutter Test All",
+            "request": "launch",
+            "type": "dart",
+            "program": "test/",
+            "args": [
+                "--verbose"
+            ]
+        },
+        {
+            "name": "DragonAI (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "E-commerce-Complete-Flutter-UI (release mode)",
+            "name": "DragonAI (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
+        },
+        {
+            "name": "huawei (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "--dart-define=DEF_DEVELOP_ENV=HUAWEI",
+                "--verbose"
+            ]
         }
     ]
 }

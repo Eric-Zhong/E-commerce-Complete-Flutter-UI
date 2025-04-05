@@ -1,5 +1,7 @@
+import 'package:dragonai/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants.dart';
 
@@ -13,19 +15,17 @@ class SignUpForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context, listen: false);
     return Form(
       key: formKey,
       child: Column(
         children: [
           TextFormField(
-            onSaved: (emal) {
-              // Email
-            },
-            validator: emaildValidator.call,
+            controller: authProvider.phoneController,
+            validator: phoneValidator.call,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-              // hintText: "Email address",
               hintText: "手机号",
               prefixIcon: Padding(
                 padding: const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
@@ -43,9 +43,7 @@ class SignUpForm extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding),
           TextFormField(
-            onSaved: (pass) {
-              // Password
-            },
+            controller: authProvider.passwordController,
             validator: passwordValidator.call,
             obscureText: true,
             decoration: InputDecoration(

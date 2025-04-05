@@ -1,8 +1,10 @@
 import 'package:get_storage/get_storage.dart';
 
 class StorageService {
+  static const String boxName = 'dragon_ai';
+
   // 初始化 GetStorage 实例
-  final GetStorage _storage = GetStorage();
+  final GetStorage _storage = GetStorage(boxName);
 
   // 保存数据
   void write(String key, dynamic value) {
