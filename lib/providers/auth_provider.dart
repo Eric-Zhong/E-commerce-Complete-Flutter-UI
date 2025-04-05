@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dragonai/providers/base_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dragonai/constants.dart';
@@ -12,7 +13,7 @@ import 'package:dragonai/services/auth_service.dart';
 import 'package:dragonai/services/storage_service.dart';
 import 'package:dragonai/system_settings.dart';
 
-class AuthProvider extends ChangeNotifier {
+class AuthProvider extends BaseProvider {
   final AuthService _authService = AuthService();
   final _storage = StorageService();
   final phoneController = TextEditingController();
@@ -37,7 +38,7 @@ class AuthProvider extends ChangeNotifier {
 
     // debug
     phoneController.text = '18611178188';
-    passwordController.text = '88888888';
+    passwordController.text = '1qaz@WSX2025';
     _isRememberMe = true;
   }
 
@@ -67,6 +68,8 @@ class AuthProvider extends ChangeNotifier {
 
       if (apiResponse!.success) {
         var loginResponse = apiResponse.result;
+        SystemSettings.current_user = loginResponse?.userInfo;
+
         // 记录 token
         _storage.write(keyApiToken, loginResponse?.token);
         _storage.write(keyUserRealName, loginResponse?.userInfo?.realname);
@@ -78,12 +81,6 @@ class AuthProvider extends ChangeNotifier {
         if (loginResponse != null && loginResponse.sysAllDictItems != null) {
           Map<String, List<DictionaryItems>> cfg = loginResponse.sysAllDictItems!;
           // SystemSettings.exam_info_status = cfg['exam_info_status'] ?? [];
-          // SystemSettings.exam_candidate_status = cfg['exam_candidate_status'] ?? [];
-          // SystemSettings.exam_interviewer_type = cfg['exam_interviewer_type'] ?? [];
-          // SystemSettings.exam_score_status = cfg['exam_score_status'] ?? [];
-          // SystemSettings.exam_unit_status = cfg['exam_unit_status'] ?? [];
-          // SystemSettings.exam_interview_question_status = cfg['exam_interview_question_status'] ?? [];
-          // SystemSettings.exam_evaluate_level = cfg['exam_evaluate_level'] ?? [];
         }
         // 获取用户角色数据
         ApiResponse<List<Role>>? userRolesResp = await _authService.getUserRoles(loginResponse?.userInfo?.id ?? '');

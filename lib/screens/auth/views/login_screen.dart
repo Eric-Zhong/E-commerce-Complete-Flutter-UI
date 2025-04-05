@@ -142,6 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (!mounted) return;
 
                         if (result) {
+                          // 登录成功后清除历史并跳转到 entryPointScreenRoute（比如主页）
                           Navigator.pushNamedAndRemoveUntil(
                             context,
                             entryPointScreenRoute,

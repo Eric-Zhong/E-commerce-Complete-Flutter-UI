@@ -1,5 +1,3 @@
-import 'package:dragonai/constants.dart';
-import 'package:dragonai/services/storage_service.dart';
-import 'package:get/get.dart';
+import 'package:flutter/foundation.dart';
 
-class BaseProvider {}
+class BaseProvider extends ChangeNotifier {}

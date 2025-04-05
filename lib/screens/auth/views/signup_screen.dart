@@ -100,7 +100,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               bool response = await authProvider.checkPhoneIsAvailable();
                               if (response) {
                                 if (authProvider.canSendSms) {
-                                  response = await authProvider.sms("1");
+                                  String smsmode = "1"; // 1:注册，2：登录
+                                  response = await authProvider.sms(smsmode);
                                 }
                                 if (response) {
                                   // 跳转到短信验证页面

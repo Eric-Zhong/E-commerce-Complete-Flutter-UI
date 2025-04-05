@@ -1,6 +1,9 @@
 import 'package:dragonai/entry_point.dart';
+import 'package:dragonai/providers/application_provider.dart';
+import 'package:dragonai/providers/profile_provider.dart';
 import 'package:dragonai/screens/auth/views/sms_verification_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'screen_export.dart';
 
@@ -186,11 +189,32 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case entryPointScreenRoute:
       return MaterialPageRoute(
-        builder: (context) => const EntryPoint(),
+        builder: (context) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider<ApplicationProvider>(create: (_) => ApplicationProvider()),
+            ChangeNotifierProvider(
+              create: (context) => ProfileProvider(
+                // 使用 applicationProvider 初始化 profileProvider
+                appProvider: Provider.of<ApplicationProvider>(context, listen: false),
+              ),
+            ),
+          ],
+          child: const EntryPoint(),
+        ),
       );
-    case profileScreenRoute:
+    case profileScreenRoute: // 它这个 profileScreenRoute 都没用上！不知道为啥定义在这里。
       return MaterialPageRoute(
-        builder: (context) => const ProfileScreen(),
+        builder: (context) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (context) => ProfileProvider(
+                // 使用 applicationProvider 初始化 profileProvider
+                appProvider: Provider.of<ApplicationProvider>(context, listen: false),
+              ),
+            ),
+          ],
+          child: const ProfileScreen(),
+        ),
       );
     // case getHelpScreenRoute:
     //   return MaterialPageRoute(

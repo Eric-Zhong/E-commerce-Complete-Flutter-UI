@@ -1,9 +1,11 @@
+import 'package:dragonai/providers/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:dragonai/components/list_tile/divider_list_tile.dart';
 import 'package:dragonai/components/network_image_with_loader.dart';
 import 'package:dragonai/constants.dart';
 import 'package:dragonai/route/screen_export.dart';
+import 'package:provider/provider.dart';
 
 import 'components/profile_card.dart';
 import 'components/profile_menu_item_list_tile.dart';
@@ -13,15 +15,16 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProfileProvider profileProvider = Provider.of<ProfileProvider>(context);
     return Scaffold(
       body: ListView(
         children: [
           ProfileCard(
-            name: "Sepide",
+            name: profileProvider.appProvider.user.realname ?? '未知',
             email: "theflutterway@gmail.com",
             imageSrc: "https://i.imgur.com/IXnwbLk.png",
-            // proLableText: "Sliver",
-            // isPro: true, if the user is pro
+            proLableText: "Sliver",
+            isPro: true, // if the user is pro
             press: () {
               Navigator.pushNamed(context, userInfoScreenRoute);
             },

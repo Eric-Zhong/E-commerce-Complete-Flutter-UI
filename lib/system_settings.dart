@@ -1,4 +1,5 @@
 import 'package:dragonai/models/account/role.dart';
+import 'package:dragonai/models/account/user_info.dart';
 import 'package:dragonai/models/base/dictionary_items.dart';
 
 class SystemSettings {
@@ -13,4 +14,6 @@ class SystemSettings {
   static List<DictionaryItems> priority = [];
   static List<DictionaryItems> company_department = [];
   static List<DictionaryItems> status = [];
+
+  static UserInfo? current_user;
 }
