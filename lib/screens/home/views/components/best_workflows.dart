@@ -1,13 +1,11 @@
 import 'package:dragonai/components/workflow/workflow_card.dart';
+import 'package:dragonai/constants.dart';
+import 'package:dragonai/route/route_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:dragonai/components/product/product_card.dart';
-import 'package:dragonai/models/product_model.dart';
+import 'package:dragonai/models/workflow_model.dart';
 
-import '../../../../constants.dart';
-import '../../../../route/route_constants.dart';
-
-class BestSellers extends StatelessWidget {
-  const BestSellers({
+class BestWorkflows extends StatelessWidget {
+  const BestWorkflows({
     super.key,
   });
 
@@ -30,20 +28,17 @@ class BestSellers extends StatelessWidget {
           height: 220,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            // Find demoBestSellersProducts on models/ProductModel.dart
-            itemCount: demoBestSellersProducts.length,
+            itemCount: bestWorkflows.length,
             itemBuilder: (context, index) => Padding(
               padding: EdgeInsets.only(
                 left: defaultPadding,
-                right: index == demoBestSellersProducts.length - 1 ? defaultPadding : 0,
+                right: index == bestWorkflows.length - 1 ? defaultPadding : 0,
               ),
-              child: ProductCard(
-                image: demoBestSellersProducts[index].image,
-                brandName: demoBestSellersProducts[index].brandName,
-                title: demoBestSellersProducts[index].title,
-                price: demoBestSellersProducts[index].price,
-                priceAfetDiscount: demoBestSellersProducts[index].priceAfetDiscount,
-                dicountpercent: demoBestSellersProducts[index].dicountpercent,
+              child: WorkflowCard(
+                image: bestWorkflows[index].image,
+                brandName: bestWorkflows[index].brandName,
+                title: bestWorkflows[index].title,
+                modelType: bestWorkflows[index].modelType,
                 press: () {
                   Navigator.pushNamed(context, productDetailsScreenRoute, arguments: index.isEven);
                 },

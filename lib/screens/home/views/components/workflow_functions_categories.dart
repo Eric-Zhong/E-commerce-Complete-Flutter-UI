@@ -4,28 +4,28 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dragonai/route/screen_export.dart';
 
 // For preview
-class CategoryModel {
+class WorkflowFunctionModel {
   final String name;
   final String? svgSrc, route;
 
-  CategoryModel({
+  WorkflowFunctionModel({
     required this.name,
     this.svgSrc,
     this.route,
   });
 }
 
-List<CategoryModel> demoCategories = [
-  CategoryModel(name: "默认", route: onSaleScreenRoute),
-  CategoryModel(name: "初级", svgSrc: "assets/icons/Child.svg", route: kidsScreenRoute),
-  CategoryModel(name: "进阶", svgSrc: "assets/icons/Sale.svg", route: onSaleScreenRoute),
-  CategoryModel(name: "高级", svgSrc: "assets/icons/Man.svg", route: onSaleScreenRoute),
-  CategoryModel(name: "专业", svgSrc: "assets/icons/Woman.svg", route: onSaleScreenRoute),
+List<WorkflowFunctionModel> defaultWorkflowFunctionCategories = [
+  WorkflowFunctionModel(name: "默认", route: onSaleScreenRoute),
+  WorkflowFunctionModel(name: "初级", svgSrc: "assets/icons/Child.svg", route: kidsScreenRoute),
+  WorkflowFunctionModel(name: "进阶", svgSrc: "assets/icons/Sale.svg", route: onSaleScreenRoute),
+  WorkflowFunctionModel(name: "高级", svgSrc: "assets/icons/Man.svg", route: onSaleScreenRoute),
+  WorkflowFunctionModel(name: "专业", svgSrc: "assets/icons/Woman.svg", route: onSaleScreenRoute),
 ];
 // End For Preview
 
-class Categories extends StatelessWidget {
-  const Categories({
+class WorkflowFunctionCategories extends StatelessWidget {
+  const WorkflowFunctionCategories({
     super.key,
   });
 
@@ -36,16 +36,16 @@ class Categories extends StatelessWidget {
       child: Row(
         children: [
           ...List.generate(
-            demoCategories.length,
+            defaultWorkflowFunctionCategories.length,
             (index) => Padding(
-              padding: EdgeInsets.only(left: index == 0 ? defaultPadding : defaultPadding / 2, right: index == demoCategories.length - 1 ? defaultPadding : 0),
+              padding: EdgeInsets.only(left: index == 0 ? defaultPadding : defaultPadding / 2, right: index == defaultWorkflowFunctionCategories.length - 1 ? defaultPadding : 0),
               child: CategoryBtn(
-                category: demoCategories[index].name,
-                svgSrc: demoCategories[index].svgSrc,
+                category: defaultWorkflowFunctionCategories[index].name,
+                svgSrc: defaultWorkflowFunctionCategories[index].svgSrc,
                 isActive: index == 0,
                 press: () {
-                  if (demoCategories[index].route != null) {
-                    Navigator.pushNamed(context, demoCategories[index].route!);
+                  if (defaultWorkflowFunctionCategories[index].route != null) {
+                    Navigator.pushNamed(context, defaultWorkflowFunctionCategories[index].route!);
                   }
                 },
               ),

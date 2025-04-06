@@ -1,7 +1,6 @@
+import 'package:dragonai/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:dragonai/components/check_mark.dart';
-
-import '../../../../constants.dart';
 
 class ColorDot extends StatelessWidget {
   const ColorDot({

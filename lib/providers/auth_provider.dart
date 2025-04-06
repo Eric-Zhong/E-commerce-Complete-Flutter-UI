@@ -20,14 +20,12 @@ class AuthProvider extends BaseProvider {
   final passwordController = TextEditingController();
   final smsVerificationController = TextEditingController();
 
-  bool _isLoading = false;
   bool _isRememberMe = false;
   bool _isAgreed = false;
   String? _error;
 
   bool get rememberMe => _isRememberMe;
   bool get agree => _isAgreed;
-  bool get isLoading => _isLoading;
   String? get error => _error;
 
   AuthProvider() {
@@ -44,7 +42,7 @@ class AuthProvider extends BaseProvider {
 
   Future<bool> login() async {
     try {
-      _isLoading = true;
+      setIsLoading(true);
       _error = null;
       notifyListeners();
 
@@ -63,8 +61,7 @@ class AuthProvider extends BaseProvider {
 
       var apiResponse = await _authService.authorize(loginRequest);
 
-      _isLoading = false;
-      notifyListeners(); // 通知所有监听者数据已更新      return false;
+      setIsLoading(false); // 通知所有监听者数据已更新      return false;
 
       if (apiResponse!.success) {
         var loginResponse = apiResponse.result;
@@ -107,8 +104,7 @@ class AuthProvider extends BaseProvider {
       return false;
     } finally {
       // 确保无论成功还是失败，isRunning 都会被设置为 false
-      _isLoading = false;
-      notifyListeners();
+      setIsLoading(false);
     }
   }
 
@@ -120,9 +116,8 @@ class AuthProvider extends BaseProvider {
   /// 注册新用户
   Future<bool> register() async {
     try {
-      _isLoading = true;
+      setIsLoading(true);
       _error = null;
-      notifyListeners();
 
       var registerRequest = RegisterRequest(
         phone: phoneController.text,
@@ -141,8 +136,7 @@ class AuthProvider extends BaseProvider {
       _error = e.toString();
       return false;
     } finally {
-      _isLoading = false;
-      notifyListeners();
+      setIsLoading(false);
     }
   }
 
@@ -153,16 +147,14 @@ class AuthProvider extends BaseProvider {
 
   /// 验证手机号是否可以用于注册
   Future<bool> checkPhoneIsAvailable() async {
-    _isLoading = true;
+    setIsLoading(true);
     _error = null;
-    notifyListeners();
 
     var result = await _authService.checkPhone(LoginRequest(
       phone: phoneController.text,
     ));
 
-    _isLoading = true;
-    notifyListeners();
+    setIsLoading(false);
 
     _error = result?.message;
 
@@ -175,17 +167,15 @@ class AuthProvider extends BaseProvider {
       _error = '不能重复发送短信验证码';
       return false;
     }
-    _isLoading = true;
+    setIsLoading(true);
     _error = null;
-    notifyListeners();
 
     var result = await _authService.sms(SmsRequest(
       mobile: phoneController.text,
       smsmode: smsmode,
     ));
 
-    _isLoading = true;
-    notifyListeners();
+    setIsLoading(false);
 
     // TODO: 假设这里发送短信成功，返回true
     if (true || result?.success == true) {

@@ -40,23 +40,26 @@ class _EntryPointState extends State<EntryPoint> {
         leading: const SizedBox(),
         leadingWidth: 0,
         centerTitle: false,
-        title: SvgPicture.asset(
-          "assets/logo/Shoplon.svg",
-          colorFilter: ColorFilter.mode(Theme.of(context).iconTheme.color!, BlendMode.srcIn),
-          height: 20,
-          width: 100,
-        ),
+        // title: SvgPicture.asset(
+        //   "assets/logo/Shoplon.svg",
+        //   colorFilter: ColorFilter.mode(Theme.of(context).iconTheme.color!, BlendMode.srcIn),
+        //   height: 20,
+        //   width: 100,
+        // ),
+        title: const Text('御龙智绘'),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, searchScreenRoute);
-            },
-            icon: SvgPicture.asset(
-              "assets/icons/Search.svg",
-              height: 24,
-              colorFilter: ColorFilter.mode(Theme.of(context).textTheme.bodyLarge!.color!, BlendMode.srcIn),
-            ),
-          ),
+          // ##### 先不做 search 功能
+          // IconButton(
+          //   onPressed: () {
+          //     Navigator.pushNamed(context, searchScreenRoute);
+          //   },
+          //   icon: SvgPicture.asset(
+          //     "assets/icons/Search.svg",
+          //     height: 24,
+          //     colorFilter: ColorFilter.mode(Theme.of(context).textTheme.bodyLarge!.color!, BlendMode.srcIn),
+          //   ),
+          // ),
+          // 消息提醒入门
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, notificationsScreenRoute);
@@ -103,27 +106,27 @@ class _EntryPointState extends State<EntryPoint> {
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Shop.svg"),
               activeIcon: svgIcon("assets/icons/Shop.svg", color: primaryColor),
-              label: "Shop",
+              label: "创作",
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Category.svg"),
               activeIcon: svgIcon("assets/icons/Category.svg", color: primaryColor),
-              label: "Discover",
+              label: "灵感",
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Bookmark.svg"),
               activeIcon: svgIcon("assets/icons/Bookmark.svg", color: primaryColor),
-              label: "Bookmark",
+              label: "素材",
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Bag.svg"),
               activeIcon: svgIcon("assets/icons/Bag.svg", color: primaryColor),
-              label: "Cart",
+              label: "作品",
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Profile.svg"),
               activeIcon: svgIcon("assets/icons/Profile.svg", color: primaryColor),
-              label: "Profile",
+              label: "我的",
             ),
           ],
         ),

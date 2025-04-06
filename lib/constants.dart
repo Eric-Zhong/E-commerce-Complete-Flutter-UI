@@ -4,13 +4,18 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:dragonai/validators/mobile_validator.dart';
 
 // Just for demo
-const productDemoImg1 = "https://i.imgur.com/CGCyp1d.png";
-const productDemoImg2 = "https://i.imgur.com/AkzWQuJ.png";
-const productDemoImg3 = "https://i.imgur.com/J7mGZ12.png";
-const productDemoImg4 = "https://i.imgur.com/q9oF9Yq.png";
-const productDemoImg5 = "https://i.imgur.com/MsppAcx.png";
-const productDemoImg6 = "https://i.imgur.com/JfyZlnO.png";
-
+// const productDemoImg1 = "https://i.imgur.com/CGCyp1d.png";
+// const productDemoImg2 = "https://i.imgur.com/AkzWQuJ.png";
+// const productDemoImg3 = "https://i.imgur.com/J7mGZ12.png";
+// const productDemoImg4 = "https://i.imgur.com/q9oF9Yq.png";
+// const productDemoImg5 = "https://i.imgur.com/MsppAcx.png";
+// const productDemoImg6 = "https://i.imgur.com/JfyZlnO.png";
+const productDemoImg1 = "http://192.168.2.25:8080/dragonfly-boot/sys/common/static/images/navigators/level_100_01.png";
+const productDemoImg2 = "http://192.168.2.25:8080/dragonfly-boot/sys/common/static/images/navigators/level_100_02.png";
+const productDemoImg3 = "http://192.168.2.25:8080/dragonfly-boot/sys/common/static/images/navigators/level_100_03.png";
+const productDemoImg4 = "http://192.168.2.25:8080/dragonfly-boot/sys/common/static/images/navigators/level_100_04.png";
+const productDemoImg5 = "http://192.168.2.25:8080/dragonfly-boot/sys/common/static/images/navigators/level_100_05.png";
+const productDemoImg6 = "http://192.168.2.25:8080/dragonfly-boot/sys/common/static/images/navigators/level_100_06.png";
 // End For demo
 
 const grandisExtendedFont = "Grandis Extended";

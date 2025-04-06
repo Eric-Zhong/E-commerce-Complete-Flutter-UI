@@ -1,24 +1,20 @@
+import 'package:dragonai/components/network_image_with_loader.dart';
+import 'package:dragonai/constants.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
-import '../network_image_with_loader.dart';
+class WorkflowCard extends StatelessWidget {
+  final String image, brandName, title;
+  final String? modelType;
+  final VoidCallback press;
 
-class ProductCard extends StatelessWidget {
-  const ProductCard({
+  const WorkflowCard({
     super.key,
     required this.image,
     required this.brandName,
     required this.title,
-    required this.price,
-    this.priceAfetDiscount,
-    this.dicountpercent,
+    this.modelType,
     required this.press,
   });
-  final String image, brandName, title;
-  final double price;
-  final double? priceAfetDiscount;
-  final int? dicountpercent;
-  final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +33,7 @@ class ProductCard extends StatelessWidget {
             child: Stack(
               children: [
                 NetworkImageWithLoader(image, radius: defaultBorderRadious),
-                if (dicountpercent != null)
+                if (modelType != null)
                   Positioned(
                     right: defaultPadding / 2,
                     top: defaultPadding / 2,
@@ -49,7 +45,7 @@ class ProductCard extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(defaultBorderRadious)),
                       ),
                       child: Text(
-                        "$dicountpercent% off",
+                        "$modelType",
                         style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w500),
                       ),
                     ),
@@ -61,8 +57,8 @@ class ProductCard extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2, vertical: defaultPadding / 2),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   // 副标题
                   Text(
@@ -77,7 +73,6 @@ class ProductCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 12),
                   ),
-                  const Spacer(),
                 ],
               ),
             ),

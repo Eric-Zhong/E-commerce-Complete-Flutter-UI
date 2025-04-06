@@ -2,7 +2,6 @@ import 'package:dragonai/providers/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:dragonai/components/list_tile/divider_list_tile.dart';
-import 'package:dragonai/components/network_image_with_loader.dart';
 import 'package:dragonai/constants.dart';
 import 'package:dragonai/route/screen_export.dart';
 import 'package:provider/provider.dart';
@@ -21,25 +20,31 @@ class ProfileScreen extends StatelessWidget {
         children: [
           ProfileCard(
             name: profileProvider.appProvider.user.realname ?? '未知',
-            email: "theflutterway@gmail.com",
-            imageSrc: "https://i.imgur.com/IXnwbLk.png",
+            // email: "theflutterway@gmail.com",
+            email: profileProvider.appProvider.user.username ?? '未知',
+            imageSrc: "https://img2.baidu.com/it/u=1669110391,207215902&fm=253&fmt=auto&app=138&f=JPG?w=200&h=200",
             proLableText: "Sliver",
-            isPro: true, // if the user is pro
+            // isPro: true, // if the user is pro
+            isShowArrow: false,
             press: () {
-              Navigator.pushNamed(context, userInfoScreenRoute);
+              // TODO: 制作用户资料显示编辑界面
+              // Navigator.pushNamed(context, userInfoScreenRoute);
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: defaultPadding, vertical: defaultPadding * 1.5),
-            child: GestureDetector(
-              onTap: () {},
-              child: const AspectRatio(
-                aspectRatio: 1.8,
-                child: NetworkImageWithLoader("https://i.imgur.com/dz0BBom.png"),
-              ),
-            ),
-          ),
-
+          // 不需要这里显示一张图片
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: defaultPadding, vertical: defaultPadding * 1.5),
+          //   child: GestureDetector(
+          //     onTap: () {},
+          //     // KB: AspectRatio组件用于按照指定的宽高比来调整子组件的大小。
+          //     // 它在保持子组件固有宽高比的同时，会根据父组件的可用空间进行缩放。
+          //     // // 这在处理图片、视频或需要特定比例显示的元素时非常有用。
+          //     child: const AspectRatio(
+          //       aspectRatio: 1.8,
+          //       child: NetworkImageWithLoader("https://img1.baidu.com/it/u=609131122,347387664&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500"),
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
             child: Text(

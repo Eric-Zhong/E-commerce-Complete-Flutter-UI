@@ -1,11 +1,11 @@
+import 'package:dragonai/components/workflow/workflow_card.dart';
 import 'package:dragonai/constants.dart';
+import 'package:dragonai/models/workflow_model.dart';
 import 'package:flutter/material.dart';
-import 'package:dragonai/components/product/product_card.dart';
-import 'package:dragonai/models/product_model.dart';
 import 'package:dragonai/route/screen_export.dart';
 
-class PopularProducts extends StatelessWidget {
-  const PopularProducts({
+class PopularWorkflowFunctions extends StatelessWidget {
+  const PopularWorkflowFunctions({
     super.key,
   });
 
@@ -28,20 +28,17 @@ class PopularProducts extends StatelessWidget {
           height: 180,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            // Find demoPopularProducts on models/ProductModel.dart
-            itemCount: demoPopularProducts.length,
+            itemCount: bestWorkflows.length,
             itemBuilder: (context, index) => Padding(
               padding: EdgeInsets.only(
                 left: defaultPadding,
-                right: index == demoPopularProducts.length - 1 ? defaultPadding : 0,
+                right: index == bestWorkflows.length - 1 ? defaultPadding : 0,
               ),
-              child: ProductCard(
-                image: demoPopularProducts[index].image,
-                brandName: demoPopularProducts[index].brandName,
-                title: demoPopularProducts[index].title,
-                price: demoPopularProducts[index].price,
-                priceAfetDiscount: demoPopularProducts[index].priceAfetDiscount,
-                dicountpercent: demoPopularProducts[index].dicountpercent,
+              child: WorkflowCard(
+                image: bestWorkflows[index].image,
+                brandName: bestWorkflows[index].brandName,
+                title: bestWorkflows[index].title,
+                modelType: bestWorkflows[index].modelType,
                 press: () {
                   Navigator.pushNamed(
                     context,

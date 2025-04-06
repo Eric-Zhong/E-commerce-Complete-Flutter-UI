@@ -1,11 +1,10 @@
+import 'package:dragonai/constants.dart';
+import 'package:dragonai/screens/home/views/components/workflow_functions_categories.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../constants.dart';
-import 'categories.dart';
 import 'offers_carousel.dart';
 
-class OffersCarouselAndCategories extends StatelessWidget {
-  const OffersCarouselAndCategories({
+class OffersWorkflowFunctions extends StatelessWidget {
+  const OffersWorkflowFunctions({
     super.key,
   });
 
@@ -27,7 +26,7 @@ class OffersCarouselAndCategories extends StatelessWidget {
         ),
         // While loading use 👇
         // const CategoriesSkelton(),
-        const Categories(),
+        const WorkflowFunctionCategories(),
       ],
     );
   }

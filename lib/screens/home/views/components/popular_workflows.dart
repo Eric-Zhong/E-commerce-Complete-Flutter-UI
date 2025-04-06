@@ -1,11 +1,11 @@
+import 'package:dragonai/components/workflow/workflow_card.dart';
 import 'package:dragonai/constants.dart';
+import 'package:dragonai/models/workflow_model.dart';
 import 'package:flutter/material.dart';
-import 'package:dragonai/components/product/product_card.dart';
-import 'package:dragonai/models/product_model.dart';
 import 'package:dragonai/route/screen_export.dart';
 
-class PopularProducts extends StatelessWidget {
-  const PopularProducts({
+class PopularWorkflows extends StatelessWidget {
+  const PopularWorkflows({
     super.key,
   });
 
@@ -25,27 +25,24 @@ class PopularProducts extends StatelessWidget {
         // While loading use 👇
         // const ProductsSkelton(),
         SizedBox(
-          height: 180,
+          height: 200,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            // Find demoPopularProducts on models/ProductModel.dart
-            itemCount: demoPopularProducts.length,
+            itemCount: popularWorkflows.length,
             itemBuilder: (context, index) => Padding(
               padding: EdgeInsets.only(
                 left: defaultPadding,
-                right: index == demoPopularProducts.length - 1 ? defaultPadding : 0,
+                right: index == popularWorkflows.length - 1 ? defaultPadding : 0,
               ),
-              child: ProductCard(
-                image: demoPopularProducts[index].image,
-                brandName: demoPopularProducts[index].brandName,
-                title: demoPopularProducts[index].title,
-                price: demoPopularProducts[index].price,
-                priceAfetDiscount: demoPopularProducts[index].priceAfetDiscount,
-                dicountpercent: demoPopularProducts[index].dicountpercent,
+              child: WorkflowCard(
+                image: popularWorkflows[index].image,
+                brandName: popularWorkflows[index].brandName,
+                title: popularWorkflows[index].title,
+                modelType: popularWorkflows[index].modelType,
                 press: () {
                   Navigator.pushNamed(
                     context,
-                    productDetailsScreenRoute,
+                    workflowScreenRouter,
                     arguments: index.isEven,
                   );
                 },

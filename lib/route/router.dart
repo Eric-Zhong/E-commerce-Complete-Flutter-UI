@@ -2,6 +2,7 @@ import 'package:dragonai/entry_point.dart';
 import 'package:dragonai/providers/application_provider.dart';
 import 'package:dragonai/providers/profile_provider.dart';
 import 'package:dragonai/screens/auth/views/sms_verification_screen.dart';
+import 'package:dragonai/screens/workflow/workflow_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -329,6 +330,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case smsVerificationScreenRoute:
       return MaterialPageRoute(
         builder: (context) => const SmsVerificationScreen(),
+      );
+    case workflowScreenRouter:
+      return MaterialPageRoute(
+        builder: (context) => const WorkflowScreen(),
       );
 
     default:
