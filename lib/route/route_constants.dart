@@ -61,3 +61,4 @@ const String thanksForOrderScreenRoute = "thanks_order";
 // DragonAI.vip
 const String smsVerificationScreenRoute = "shortmessage";
 const String workflowScreenRouter = "workflow";
+const String promptInputScreenRouter = "prompt_input";

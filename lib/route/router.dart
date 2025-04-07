@@ -2,6 +2,10 @@ import 'package:dragonai/entry_point.dart';
 import 'package:dragonai/providers/application_provider.dart';
 import 'package:dragonai/providers/profile_provider.dart';
 import 'package:dragonai/screens/auth/views/sms_verification_screen.dart';
+import 'package:dragonai/screens/workflow/prompt_input_screen.dart';
+import 'package:dragonai/screens/workflow/providers/prompt_input_provider.dart';
+import 'package:dragonai/screens/workflow/providers/workflow_provider.dart';
+import 'package:dragonai/screens/workflow/providers/workflow_screen_provider.dart';
 import 'package:dragonai/screens/workflow/workflow_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -333,7 +337,24 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case workflowScreenRouter:
       return MaterialPageRoute(
-        builder: (context) => const WorkflowScreen(),
+        builder: (context) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider<WorkflowScreenProvider>(create: (_) => WorkflowScreenProvider()),
+          ],
+          child: const WorkflowScreen(),
+        ),
+      );
+    case promptInputScreenRouter: // workflow
+      Map<String, String> args = settings.arguments as Map<String, String>;
+      return MaterialPageRoute(
+        builder: (context) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (context) => PromptInputProvider()),
+          ],
+          child: PromptInputScreen(
+            prompt: args['data'] ?? '',
+          ),
+        ),
       );
 
     default:

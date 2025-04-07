@@ -1,14 +1,17 @@
 import 'package:dragonai/components/workflow/workflow_execution_button.dart';
-import 'package:dragonai/screens/product/views/components/notify_me_card.dart';
+import 'package:dragonai/route/screen_export.dart';
 import 'package:dragonai/screens/product/views/components/product_images.dart';
-import 'package:dragonai/screens/product/views/product_buy_now_screen.dart';
 import 'package:dragonai/screens/workflow/components/paramter_list_tile.dart';
 import 'package:dragonai/screens/workflow/components/workflow_info.dart';
+import 'package:dragonai/screens/workflow/prompt_input_screen.dart';
+import 'package:dragonai/screens/workflow/providers/prompt_input_provider.dart';
+import 'package:dragonai/screens/workflow/providers/workflow_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:dragonai/components/buy_full_ui_kit.dart';
 import 'package:dragonai/components/custom_modal_bottom_sheet.dart';
 import 'package:dragonai/constants.dart';
 import 'package:dragonai/screens/product/views/product_returns_screen.dart';
+import 'package:provider/provider.dart';
 
 class WorkflowScreen extends StatefulWidget {
   const WorkflowScreen({super.key});
@@ -19,16 +22,20 @@ class WorkflowScreen extends StatefulWidget {
 class _WorkflowScreenState extends State<WorkflowScreen> {
   @override
   Widget build(BuildContext context) {
+    WorkflowScreenProvider provider = Provider.of<WorkflowScreenProvider>(context, listen: true);
     return Scaffold(
       // 底部按钮
       bottomNavigationBar: WorkflowExecutionButton(
         duration: 15,
         press: () {
-          customModalBottomSheet(
-            context,
-            height: MediaQuery.of(context).size.height * 0.92,
-            child: const ProductBuyNowScreen(),
-          );
+          // 底部滑出信息栏
+          // customModalBottomSheet(
+          //   context,
+          //   height: MediaQuery.of(context).size.height * 0.92,
+          //   child: const ProductBuyNowScreen(),
+          // );
+
+          // 直接调用api执行comfyui
         },
       ),
       body: SafeArea(
@@ -65,26 +72,33 @@ class _WorkflowScreenState extends State<WorkflowScreen> {
             ),
             ParameterListTile(
               // svgSrc: "assets/icons/Product.svg",
-              title: "正向提示词",
-              press: () {
-                customModalBottomSheet(
+              title: "正向提示词${provider.positivePrompt.isNotEmpty ? "\n${provider.positivePrompt}" : ""}",
+              press: () async {
+                var args = {"data": provider.positivePrompt};
+                print('Arguments being passed: $args');
+                final result = await Navigator.pushNamed<dynamic>(
                   context,
-                  height: MediaQuery.of(context).size.height * 0.92,
-                  child: const BuyFullKit(images: ["assets/screens/Product detail.png"]),
+                  promptInputScreenRouter, // 确保使用正确的路由名称
+                  arguments: args,
                 );
+                if (result != null && result.isNotEmpty) {
+                  provider.updatePositivePrompt(result);
+                } else {}
               },
             ),
             ParameterListTile(
               // svgSrc: "assets/icons/Delivery.svg",
-              title: "反向提示词",
-              press: () {
-                customModalBottomSheet(
+              title: "反向提示词${provider.negativePrompt.isNotEmpty ? "\n${provider.negativePrompt}" : ""}",
+              press: () async {
+                var args = {"data": provider.negativePrompt};
+                final result = await Navigator.pushNamed<dynamic>(
                   context,
-                  height: MediaQuery.of(context).size.height * 0.92,
-                  child: const BuyFullKit(
-                    images: ["assets/screens/Shipping information.png"],
-                  ),
+                  promptInputScreenRouter, // 确保使用正确的路由名称
+                  arguments: args,
                 );
+                if (result != null && result.isNotEmpty) {
+                  provider.updateNegativePrompt(result);
+                } else {}
               },
             ),
             ParameterListTile(

@@ -56,6 +56,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       onGenerateRoute: router.generateRoute,
       initialRoute: onbordingScreenRoute,
+      routes: const {},
     );
   }
 }

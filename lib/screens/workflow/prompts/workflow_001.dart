@@ -1,17 +1,49 @@
-class WorkflowTask {
-  late String _prompt;
-  String get prompt => _prompt;
+import 'dart:convert';
 
-  WorkflowTask(
-    String prompt,
+import 'package:dragonai/screens/workflow/base_workflow.dart';
+
+class Workflow001 extends BaseWorkflow {
+  late String _promptOrginal;
+  String get promptOrginal => _promptOrginal;
+
+  Map<String, dynamic> _prompt = {};
+
+  Workflow001(
+    super.prompt,
   ) {
-    _prompt = prompt;
-    _prompt = tmp_prompt();
+    _promptOrginal = tmp_prompt();
+    _prompt = json.decode(_promptOrginal);
+  }
+
+  void inputPositive(String value) {
+    _prompt["38"]["inputs"]["text"] = value;
+  }
+
+  void inputNegative(String value) {
+    _prompt["39"]["inputs"]["text"] = value;
   }
 
   String tmp_prompt() {
     return '''
       {
+        "38": {
+          "inputs": {
+            "value": "室内，客厅，沙发，茶几，绿植，电视，地中海风格，现代"
+          },
+          "class_type": "PrimitiveString",
+          "_meta": {
+            "title": "String_Input_Positive"
+          }
+        },
+        "39": {
+          "inputs": {
+            "value": "裸体"
+          },
+          "class_type": "PrimitiveString",
+          "_meta": {
+            "title": "String_Input_Negative"
+          }
+        },
         "6": {
           "inputs": {
             "text": [
@@ -133,24 +165,6 @@ class WorkflowTask {
           "class_type": "CLIPTextEncode",
           "_meta": {
             "title": "CLIP Text Encode (Negative Prompt)"
-          }
-        },
-        "38": {
-          "inputs": {
-            "value": "室内，客厅，沙发，茶几，绿植，电视，地中海风格，现代"
-          },
-          "class_type": "PrimitiveString",
-          "_meta": {
-            "title": "String_Input_Positive"
-          }
-        },
-        "39": {
-          "inputs": {
-            "value": "裸体"
-          },
-          "class_type": "PrimitiveString",
-          "_meta": {
-            "title": "String_Input_Negative"
           }
         },
         "40": {
