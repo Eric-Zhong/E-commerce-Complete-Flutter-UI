@@ -1,15 +1,14 @@
 import 'dart:convert';
 
 class BaseWorkflow {
-  late String _promptOrginal;
+  late final String _promptOrginal;
   String get promptOrginal => _promptOrginal;
 
-  Map<String, dynamic> _prompt = {};
+  Map<String, dynamic> prompt = {};
 
   BaseWorkflow(
-    String prompt,
+    this._promptOrginal,
   ) {
-    _promptOrginal = prompt;
-    _prompt = json.decode(_promptOrginal);
+    prompt = json.decode(_promptOrginal);
   }
 }

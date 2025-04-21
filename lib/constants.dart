@@ -98,6 +98,8 @@ const pasNotMatchErrorText = "手机号或密码不正确";
 const apiRootPath = 'dragonfly-boot';
 String apiUrl = 'http://localhost:8080/$apiRootPath';
 String webSocketUrl = 'ws://localhost:8080/$apiRootPath';
+String comfyUIUrl = 'http://192.168.2.25:8188';
+String comfyUIWebSocketUrl = 'ws://192.168.2.25:8188';
 // Login account
 const keyPhone = 'PHONE';
 const keyPassword = 'PASSWORD';

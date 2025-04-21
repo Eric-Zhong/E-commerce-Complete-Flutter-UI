@@ -3,27 +3,21 @@ import 'dart:convert';
 import 'package:dragonai/screens/workflow/base_workflow.dart';
 
 class Workflow001 extends BaseWorkflow {
-  late String _promptOrginal;
-  String get promptOrginal => _promptOrginal;
-
-  Map<String, dynamic> _prompt = {};
-
   Workflow001(
     super.prompt,
   ) {
-    _promptOrginal = tmp_prompt();
-    _prompt = json.decode(_promptOrginal);
+    prompt = json.decode(demoPrompt());
   }
 
   void inputPositive(String value) {
-    _prompt["38"]["inputs"]["text"] = value;
+    prompt["38"]["inputs"]["text"] = value;
   }
 
   void inputNegative(String value) {
-    _prompt["39"]["inputs"]["text"] = value;
+    prompt["39"]["inputs"]["text"] = value;
   }
 
-  String tmp_prompt() {
+  String demoPrompt() {
     return '''
       {
         "38": {

@@ -62,3 +62,4 @@ const String thanksForOrderScreenRoute = "thanks_order";
 const String smsVerificationScreenRoute = "shortmessage";
 const String workflowScreenRouter = "workflow";
 const String promptInputScreenRouter = "prompt_input";
+const String batchSizeScreenRouter = "batch_size_input";

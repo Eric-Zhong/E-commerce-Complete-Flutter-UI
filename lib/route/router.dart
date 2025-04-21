@@ -2,9 +2,10 @@ import 'package:dragonai/entry_point.dart';
 import 'package:dragonai/providers/application_provider.dart';
 import 'package:dragonai/providers/profile_provider.dart';
 import 'package:dragonai/screens/auth/views/sms_verification_screen.dart';
+import 'package:dragonai/screens/workflow/batch_size_screen.dart';
 import 'package:dragonai/screens/workflow/prompt_input_screen.dart';
+import 'package:dragonai/screens/workflow/providers/batch_size_provider.dart';
 import 'package:dragonai/screens/workflow/providers/prompt_input_provider.dart';
-import 'package:dragonai/screens/workflow/providers/workflow_provider.dart';
 import 'package:dragonai/screens/workflow/providers/workflow_screen_provider.dart';
 import 'package:dragonai/screens/workflow/workflow_screen.dart';
 import 'package:flutter/material.dart';
@@ -344,15 +345,31 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           child: const WorkflowScreen(),
         ),
       );
-    case promptInputScreenRouter: // workflow
+    case promptInputScreenRouter: // 提示词输入界面
       Map<String, String> args = settings.arguments as Map<String, String>;
+      String prompt = args['data'] ?? '';
       return MaterialPageRoute(
         builder: (context) => MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (context) => PromptInputProvider()),
           ],
           child: PromptInputScreen(
-            prompt: args['data'] ?? '',
+            prompt: prompt,
+          ),
+        ),
+      );
+    case batchSizeScreenRouter: // 提示词输入界面
+      Map<String, int> args = settings.arguments as Map<String, int>;
+      int size = args['data'] != null ? int.parse(args['data'].toString()) : 1;
+      return MaterialPageRoute(
+        builder: (context) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (context) => BatchSizeProvider()),
+          ],
+          child: BatchSizeScreen(
+            size: size,
+            max: 4,
+            min: 1,
           ),
         ),
       );

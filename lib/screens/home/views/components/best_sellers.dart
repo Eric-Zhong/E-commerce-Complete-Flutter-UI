@@ -1,4 +1,3 @@
-import 'package:dragonai/components/workflow/workflow_card.dart';
 import 'package:flutter/material.dart';
 import 'package:dragonai/components/product/product_card.dart';
 import 'package:dragonai/models/product_model.dart';

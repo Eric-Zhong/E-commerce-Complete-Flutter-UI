@@ -7,7 +7,6 @@ import 'package:dragonai/models/authorization/sms_request.dart';
 import 'package:dragonai/models/base/api_response.dart';
 import 'package:dragonai/services/base_service.dart';
 import 'package:dragonai/utils/sign_utils.dart';
-import 'package:flutter/foundation.dart';
 
 class AuthService extends BaseService {
   AuthService() {
@@ -17,7 +16,6 @@ class AuthService extends BaseService {
   @override
   void onInit() {
     httpClient.defaultDecoder = (map) {
-      debugPrint('Login provider onInit()');
       if (map is Map<String, dynamic>) return LoginRequest.fromJson(map);
       if (map is List) {
         return map.map((item) => LoginRequest.fromJson(item)).toList();

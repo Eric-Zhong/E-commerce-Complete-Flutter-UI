@@ -1,44 +1,113 @@
 import 'package:dragonai/constants.dart';
-import 'package:dragonai/models/account/role.dart';
-import 'package:dragonai/models/authorization/login_request.dart';
-import 'package:dragonai/models/authorization/login_response.dart';
-import 'package:dragonai/models/authorization/register_request.dart';
-import 'package:dragonai/models/authorization/sms_request.dart';
 import 'package:dragonai/models/base/api_response.dart';
-import 'package:dragonai/services/base_service.dart';
-import 'package:dragonai/utils/sign_utils.dart';
-import 'package:flutter/foundation.dart';
+import 'package:dragonai/models/comfyui/prompt_request.dart';
+import 'package:dragonai/models/comfyui/prompt_response.dart';
+import 'package:dragonai/services/storage_service.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ComfyuiService extends BaseService {
+class ComfyuiService extends GetConnect {
+  StorageService storage = StorageService();
+
   ComfyuiService() {
     onInit();
   }
 
   @override
   void onInit() {
-    httpClient.defaultDecoder = (map) {
-      if (map is Map<String, dynamic>) return LoginRequest.fromJson(map);
-      if (map is List) {
-        return map.map((item) => LoginRequest.fromJson(item)).toList();
-      }
-    };
-    // 因为登录api属于sys模块，这里需要重新定义一下默认的 api URL
-    httpClient.baseUrl = apiUrl;
+    super.onInit();
+    debugPrint('GetConnect.onInit() -> BaseProvider.onInit()');
+    httpClient.baseUrl = comfyUIUrl;
+    httpClient.defaultContentType = 'application/json';
+
+    // 添加请求拦截器
+    httpClient.addRequestModifier<void>((request) async {
+      var token = storage.read(keyApiToken);
+      request.headers['x-access-token'] = token;
+      request.headers['x-app-client'] = "dragonai_app";
+      return request;
+    });
+
+    // 动态添加或更新 Header
+    httpClient.addAuthenticator<void>((request) async {
+      // 动态添加或更新 Header
+      // request.headers['Authorization'] = 'Bearer NEW_TOKEN';
+      return request;
+    });
+
+    httpClient.addResponseModifier((request, response) {
+      // debugPrint('GetConnect.onInit() -> httpClient.addResponseModifier');
+      // debugPrint('------------------------------------------------------------------------');
+      // debugPrint(request.url.path);
+      // debugPrint(response.bodyString);
+      // debugPrint('------------------------------------------------------------------------');
+      return response;
+    });
+
+    httpClient.timeout = const Duration(seconds: 300);
+  }
+
+  @override
+  Future<Response<T>> post<T>(
+    String? url,
+    body, {
+    String? contentType,
+    Map<String, String>? headers,
+    Map<String, dynamic>? query,
+    Decoder<T>? decoder,
+    Progress? uploadProgress,
+  }) {
+    // KB: 异步执行的代码中，默认是不能捕获到异常的，如果需要handle，需在异步调用时，添加 await 参数。
+    // debugPrint('GetConnect.onInit() -> Post url: $url');
+    var response = super.post(
+      url,
+      body,
+      contentType: contentType,
+      headers: headers,
+      query: query,
+      decoder: decoder,
+      uploadProgress: uploadProgress,
+    );
+    return response;
+  }
+
+  @override
+  Future<Response<T>> get<T>(
+    String url, {
+    Map<String, String>? headers,
+    String? contentType,
+    Map<String, dynamic>? query,
+    Decoder<T>? decoder,
+  }) {
+    // debugPrint('GetConnect.onInit() -> Get url: $url');
+    var response = super.get(
+      url,
+      headers: headers,
+      contentType: contentType,
+      query: query,
+      decoder: decoder,
+    );
+    return response;
   }
 
   /// 登录验证
-  Future<ApiResponse<LoginResponse>?> authorize(LoginRequest inputDto) async {
+  Future<ApiResponse<PromptResponse>?> prompt(PromptRequest prompt) async {
     try {
       var resp = await post(
-        "/sys/login",
-        inputDto.toJson(),
+        "/prompt",
+        prompt.toJson(),
         headers: {'Content-Type': 'application/json'},
         decoder: (data) {
           if (data is String) {
             // debugPrint(data);
-            return ApiResponse<LoginResponse>(success: false, message: '失败', error: '登录认证失败', result: null);
+            return ApiResponse<PromptResponse>(
+              success: false,
+              message: '失败',
+              error: '登录认证失败',
+              result: null,
+            );
           } else {
-            return ApiResponse.fromJson(data, LoginResponse.fromJson);
+            return ApiResponse<PromptResponse>(success: true, message: '启动工作流成功', error: null, result: PromptResponse.fromJson(data));
           }
         },
       );
@@ -50,107 +119,6 @@ class ComfyuiService extends BaseService {
       }
     } catch (e) {
       throw Exception('登录请求失败: ${e.toString()}');
-    }
-  }
-
-  /// 获取用户的角色信息
-  Future<ApiResponse<List<Role>>?> getUserRoles(String userId) async {
-    var token = storage.read(keyApiToken);
-    var query = {'userid': userId};
-    var resp = await get(
-      "/sys/user/queryUserRoleV2",
-      query: query,
-      headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': token,
-      },
-      decoder: (data) {
-        if (data == null) {
-          // debugPrint(data);
-          return ApiResponse<List<Role>>(success: false, message: '失败', error: '登录认证失败', result: []);
-        } else {
-          return ApiResponse<List<Role>>.fromJson(data, Role.fromListResponseJson);
-        }
-      },
-    );
-    // debugPrint(resp.bodyString);
-    if (resp.status.hasError) {
-      // 返回错误信息
-      return Future.error(resp.statusText ?? 'Error');
-    } else {
-      return resp.body;
-    }
-  }
-
-  /// 新用户注册
-  Future<ApiResponse<String>?> register(RegisterRequest inputDto) async {
-    try {
-      var resp = await post(
-        "/sys/user/register",
-        inputDto.toJson(),
-        headers: {'Content-Type': 'application/json'},
-        decoder: (data) {
-          return ApiResponse<String>.fromJson(data, ApiResponse.fromStringResponseJson);
-        },
-      );
-      if (resp.status.hasError) {
-        // 返回错误信息
-        return Future.error(resp.statusText ?? 'Error');
-      } else {
-        return resp.body;
-      }
-    } catch (e) {
-      throw Exception('新用户注册失败: ${e.toString()}');
-    }
-  }
-
-  /// 手机是否存在验证
-  Future<ApiResponse<String>?> checkPhone(LoginRequest inputDto) async {
-    try {
-      var resp = await post(
-        "/sys/checkphone",
-        inputDto.toJson(),
-        headers: {'Content-Type': 'application/json'},
-        decoder: (data) {
-          return ApiResponse<String>.fromJson(data, ApiResponse.fromStringResponseJson);
-        },
-      );
-      if (resp.status.hasError) {
-        // 返回错误信息
-        return Future.error(resp.statusText ?? 'Error');
-      } else {
-        return resp.body;
-      }
-    } catch (e) {
-      throw Exception('检查手机号有效性失败: ${e.toString()}');
-    }
-  }
-
-  /// 手机是否存在验证
-  Future<ApiResponse<String>?> sms(SmsRequest inputDto) async {
-    // 登录前的自定义签名
-    String signature = SignUtils.getSign('/$apiRootPath/sys/sms', inputDto.toJson());
-    try {
-      var resp = await post(
-        "/sys/sms",
-        inputDto.toJson(),
-        headers: {
-          'Content-Type': 'application/json',
-          'X-TIMESTAMP': DateTime.now().millisecondsSinceEpoch.toString(),
-          'X-Sign': signature,
-        },
-        decoder: (data) {
-          return ApiResponse<String>.fromJson(data, ApiResponse.fromStringResponseJson);
-        },
-      );
-      if (resp.status.hasError) {
-        // 返回错误信息
-        return Future.error(resp.statusText ?? 'Error');
-      } else {
-        return resp.body;
-      }
-    } catch (e) {
-      throw Exception('发送短信失败: ${e.toString()}');
     }
   }
 }

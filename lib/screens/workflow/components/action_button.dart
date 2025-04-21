@@ -1,17 +1,17 @@
 import 'package:dragonai/constants.dart';
 import 'package:flutter/material.dart';
 
-class WorkflowExecutionButton extends StatelessWidget {
-  const WorkflowExecutionButton({
+class ActionButton extends StatelessWidget {
+  const ActionButton({
     super.key,
-    required this.duration,
+    required this.subtitle,
     this.title = "执行",
-    this.subTitle = "平均生成时长(秒)",
+    this.comment = "平均生成时长(秒)",
     required this.press,
   });
 
-  final int duration;
-  final String title, subTitle;
+  final String subtitle;
+  final String title, comment;
   final VoidCallback press;
 
   @override
@@ -42,11 +42,11 @@ class WorkflowExecutionButton extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            duration.toStringAsFixed(0),
+                            subtitle,
                             style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
                           ),
                           Text(
-                            subTitle,
+                            comment,
                             style: const TextStyle(color: Colors.white54, fontWeight: FontWeight.w500),
                           )
                         ],
@@ -58,7 +58,7 @@ class WorkflowExecutionButton extends StatelessWidget {
                     child: Container(
                       alignment: Alignment.center,
                       height: double.infinity,
-                      color: Colors.black.withOpacity(0.15),
+                      color: Colors.black.withValues(alpha: 0.15),
                       child: Text(
                         title,
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),

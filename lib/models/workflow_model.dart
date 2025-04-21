@@ -40,7 +40,7 @@ List<WorkflowModel> popularWorkflows = [
     image: "http://192.168.2.25:8080/dragonfly-boot/sys/common/static/images/navigators/level_100_01.png",
     title: "输入文字生成图片",
     brandName: "图生图",
-    modelType: "XL",
+    modelType: "SD",
   ),
   WorkflowModel(
     image: "http://192.168.2.25:8080/dragonfly-boot/sys/common/static/images/navigators/level_100_02.png",
@@ -52,13 +52,13 @@ List<WorkflowModel> popularWorkflows = [
     image: "http://192.168.2.25:8080/dragonfly-boot/sys/common/static/images/navigators/level_100_03.png",
     title: "风格迁移\n上传图片样式",
     brandName: "文生图",
-    modelType: "XL",
+    modelType: "F1",
   ),
   WorkflowModel(
     image: "http://192.168.2.25:8080/dragonfly-boot/sys/common/static/images/navigators/level_100_04.png",
     title: "局部重绘",
     brandName: "文生图",
-    modelType: "XL",
+    modelType: "F1",
   ),
   // WorkflowModel(
   //   image: "http://192.168.2.25:8080/dragonfly-boot/sys/common/static/images/navigators/level_100_05.png",

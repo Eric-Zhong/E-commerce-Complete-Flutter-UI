@@ -1,4 +1,4 @@
-import 'package:dragonai/constants.dart';
+import 'package:dragonai/screens/workflow/components/action_button.dart';
 import 'package:dragonai/screens/workflow/providers/prompt_input_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +18,14 @@ class PromptInputScreen extends StatelessWidget {
     promptInputProvider.textEditingController.text = prompt;
 
     return Scaffold(
+      bottomNavigationBar: ActionButton(
+        title: '确定',
+        subtitle: '数值范围：1~4',
+        comment: '推荐从1开始',
+        press: () {
+          Navigator.pop(context, promptInputProvider.textEditingController.text);
+        },
+      ),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -42,22 +50,22 @@ class PromptInputScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SliverToBoxAdapter(
-              child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    spacing: defaultPadding / 2,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FilledButton.tonal(onPressed: () {}, child: const Text('清空')),
-                      FilledButton(
-                          onPressed: () {
-                            Navigator.pop(context, promptInputProvider.textEditingController.text);
-                          },
-                          child: const Text('确定')),
-                    ],
-                  )),
-            ),
+            // SliverToBoxAdapter(
+            //   child: Padding(
+            //       padding: const EdgeInsets.all(16.0),
+            //       child: Row(
+            //         spacing: defaultPadding / 2,
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [
+            //           FilledButton.tonal(onPressed: () {}, child: const Text('清空')),
+            //           FilledButton(
+            //               onPressed: () {
+            //                 Navigator.pop(context, promptInputProvider.textEditingController.text);
+            //               },
+            //               child: const Text('确定')),
+            //         ],
+            //       )),
+            // ),
           ],
         ),
       ),
